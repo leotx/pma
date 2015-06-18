@@ -1,5 +1,8 @@
-﻿using Android.App;
+﻿using System.Linq;
+using System.Xml.Linq;
+using Android.App;
 using Android.OS;
+using Android.Widget;
 
 namespace PMA
 {
@@ -10,8 +13,27 @@ namespace PMA
         {
             base.OnCreate(bundle);
 
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
+            var userName = FindViewById<EditText>(Resource.Id.etUserName);
+            var password = FindViewById<EditText>(Resource.Id.etPass);
+            var loginButton = FindViewById<Button>(Resource.Id.btnSingIn);
+
+            if (loginButton != null)
+            {
+                loginButton.Click += async (sender, e) =>
+                {
+                    //StartActivity(typeof(Appointment));
+                    var servicePma = new Services();
+                    var response = servicePma.Login(userName.Text, password.Text);
+                    GetToken(response);
+                };
+            }
+        }
+
+        private static void GetToken(string response)
+        {
+            var token = XDocument.Parse(response).Descendants("token").FirstOrDefault();
         }
     }
 }
