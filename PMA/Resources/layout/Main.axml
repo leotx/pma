@@ -44,5 +44,9 @@
             android:text="Entrar"
             style="@style/DefaultButtonText"
             android:background="@drawable/button_default_bg" />
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar1" />
     </LinearLayout>
 </RelativeLayout>

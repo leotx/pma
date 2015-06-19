@@ -18,15 +18,19 @@ namespace PMA
             var userName = FindViewById<EditText>(Resource.Id.etUserName);
             var password = FindViewById<EditText>(Resource.Id.etPass);
             var loginButton = FindViewById<Button>(Resource.Id.btnSingIn);
+            var progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
 
             if (loginButton != null)
             {
                 loginButton.Click += async (sender, e) =>
                 {
+                    progressBar.Indeterminate = true;
+                    progressBar.Enabled = true;
                     //StartActivity(typeof(Appointment));
                     var servicePma = new Services();
                     var response = servicePma.Login(userName.Text, password.Text);
                     GetToken(response);
+                    progressBar.Enabled = false;
                 };
             }
         }

@@ -1,0 +1,4 @@
+PMA.MainActivity, PMA;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
+PMA.MainActivity, PMA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
+PMA.MainActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
+pma.MainActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
