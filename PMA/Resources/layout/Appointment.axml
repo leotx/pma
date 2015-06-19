@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
+    android:orientation="vertical"
     android:gravity="center">
     <Button
         android:id="@+id/angry_btn"
@@ -15,5 +15,13 @@
         android:shadowColor="#FFFFFF"
         android:shadowDx="0"
         android:shadowDy="0"
-        android:shadowRadius="5" />
+        android:shadowRadius="5"
+        android:layout_margin="10dp" />
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeAppointment"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textSize="20sp" />
 </LinearLayout>

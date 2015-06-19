@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using Android.App;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 
 namespace PMA
@@ -19,18 +20,19 @@ namespace PMA
             var password = FindViewById<EditText>(Resource.Id.etPass);
             var loginButton = FindViewById<Button>(Resource.Id.btnSingIn);
             var progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
+            progressBar.Visibility = ViewStates.Invisible;
 
             if (loginButton != null)
             {
                 loginButton.Click += async (sender, e) =>
                 {
-                    progressBar.Indeterminate = true;
-                    progressBar.Enabled = true;
-                    //StartActivity(typeof(Appointment));
+                    progressBar.Visibility = ViewStates.Visible;
                     var servicePma = new Services();
                     var response = servicePma.Login(userName.Text, password.Text);
                     GetToken(response);
                     progressBar.Enabled = false;
+                    StartActivity(typeof(Appointment));
+                    progressBar.Visibility = ViewStates.Invisible;
                 };
             }
         }

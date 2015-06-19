@@ -9,7 +9,6 @@ F:\projects\PMA\PMA\bin\Debug\System.Net.Http.Primitives.dll
 F:\projects\PMA\PMA\bin\Debug\Newtonsoft.Json.xml
 F:\projects\PMA\PMA\bin\Debug\System.Net.Http.Extensions.xml
 F:\projects\PMA\PMA\bin\Debug\System.Net.Http.Primitives.xml
-F:\projects\PMA\PMA\obj\Debug\PMA.csprojResolveAssemblyReference.cache
 F:\projects\PMA\PMA\obj\Debug\PMA.dll
 F:\projects\PMA\PMA\obj\Debug\PMA.pdb
 F:\projects\PMA\PMA\obj\Debug\android\bin\PMA.PMA.apk
@@ -29,3 +28,4 @@ F:\projects\PMA\PMA\obj\Debug\res\values\dimens.xml
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\button_appointment.xml
 F:\projects\PMA\PMA\obj\Debug\R.cs.flag
 F:\projects\PMA\PMA\obj\Debug\uploadflags.txt
+F:\projects\PMA\PMA\obj\Debug\PMA.csprojResolveAssemblyReference.cache

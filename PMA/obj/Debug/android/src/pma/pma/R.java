@@ -30,10 +30,11 @@ public final class R {
     }
     public static final class id {
         public static final int angry_btn=0x7f070000;
-        public static final int btnSingIn=0x7f070003;
-        public static final int etPass=0x7f070002;
-        public static final int etUserName=0x7f070001;
-        public static final int progressBar1=0x7f070004;
+        public static final int btnSingIn=0x7f070004;
+        public static final int etPass=0x7f070003;
+        public static final int etUserName=0x7f070002;
+        public static final int progressBar1=0x7f070005;
+        public static final int timeAppointment=0x7f070001;
     }
     public static final class layout {
         public static final int appointment=0x7f030000;
