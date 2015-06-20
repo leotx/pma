@@ -3,5 +3,6 @@
   <PropertyGroup>
     <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
     <ProjectView>ShowAllFiles</ProjectView>
+    <SelectedDevice>Sony D6633</SelectedDevice>
   </PropertyGroup>
 </Project>
