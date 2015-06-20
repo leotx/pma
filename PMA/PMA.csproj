@@ -67,6 +67,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services.cs" />
+    <Compile Include="TipoApontamento.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -90,7 +91,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\button_default_bg.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\edittext_bottom_bg.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\edittext_bottom_bg.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\edittext_default_bg.xml" />

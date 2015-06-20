@@ -107,7 +107,7 @@ namespace PMA
 		{
 			
 			// aapt resource value: 0x7f070000
-			public const int angry_btn = 2131165184;
+			public const int btnAppointment = 2131165184;
 			
 			// aapt resource value: 0x7f070004
 			public const int btnSingIn = 2131165188;

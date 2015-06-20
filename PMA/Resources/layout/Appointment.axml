@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center">
     <Button
-        android:id="@+id/angry_btn"
+        android:id="@+id/btnAppointment"
         android:text="Cheguei"
         android:textColor="#040505"
         android:textSize="30sp"

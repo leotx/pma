@@ -29,7 +29,7 @@ public final class R {
         public static final int user=0x7f020009;
     }
     public static final class id {
-        public static final int angry_btn=0x7f070000;
+        public static final int btnAppointment=0x7f070000;
         public static final int btnSingIn=0x7f070004;
         public static final int etPass=0x7f070003;
         public static final int etUserName=0x7f070002;
