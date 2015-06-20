@@ -43,9 +43,20 @@ namespace PMA
             _progressBar.Visibility = ViewStates.Visible;
             var servicePma = new Services();
             var response = servicePma.Login(_usernameText.Text, _passwordText.Text);
-            GetToken(response);
-            _progressBar.Enabled = false;
-            StartActivity(typeof(Appointment));
+
+
+            var tokenData = GetToken(response);
+            if (tokenData != null)
+            {
+                var appointmentActivity = new Intent(this, typeof (Appointment));
+                appointmentActivity.PutExtra("TOKEN", tokenData);
+                StartActivity(appointmentActivity);
+            }
+            else
+            {
+                RunOnUiThread(() => Toast.MakeText(this, "Erro ao efetuar login.", ToastLength.Long).Show());
+            }
+
             _progressBar.Visibility = ViewStates.Invisible;
         }
 
@@ -60,12 +71,13 @@ namespace PMA
             prefEditor.Commit();
         }
 
-        private static void GetToken(string response)
+        private static string GetToken(string response)
         {
             var token = XDocument.Parse(response).Descendants("token").FirstOrDefault();
+            return token != null ? token.Value : null;
         }
 
-        protected void LoadPreferences()
+        private void LoadPreferences()
         {
             var prefs = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
             var username = prefs.GetString("USERNAME", null);

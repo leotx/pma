@@ -1,5 +1,6 @@
 using Android.App;
 using Android.OS;
+using Android.Widget;
 
 namespace PMA
 {
@@ -11,6 +12,9 @@ namespace PMA
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Appointment);
+
+            var token = Intent.GetStringExtra("TOKEN");
+            RunOnUiThread(() => Toast.MakeText(this, token, ToastLength.Long).Show());
         }
     }
 }
