@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 
 namespace PMA
@@ -35,15 +37,24 @@ namespace PMA
 
         void LoginClick(object sender, EventArgs e)
         {
-            Login();
+            StartTask();
+        }
+
+        private void StartTask()
+        {
+            _progressBar.Visibility = ViewStates.Visible;
+            var task = new Task(Login);
+            task.Start();
+            task.ContinueWith(x => { _progressBar.Visibility = ViewStates.Gone; });
         }
 
         private void Login()
         {
-            _progressBar.Visibility = ViewStates.Visible;
-            var servicePma = new Services();
-            var response = servicePma.Login(_usernameText.Text, _passwordText.Text);
+            var inputManager = (InputMethodManager)GetSystemService(InputMethodService);
+            inputManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, HideSoftInputFlags.NotAlways);
 
+            var servicePma = new Services();
+            var response = servicePma.Login(_usernameText.Text.Trim(), _passwordText.Text.Trim());
 
             var tokenData = GetToken(response);
             if (tokenData != null)
@@ -56,8 +67,6 @@ namespace PMA
             {
                 RunOnUiThread(() => Toast.MakeText(this, "Erro ao efetuar login.", ToastLength.Long).Show());
             }
-
-            _progressBar.Visibility = ViewStates.Invisible;
         }
 
         protected override void OnDestroy()
@@ -87,7 +96,7 @@ namespace PMA
             
             _usernameText.Text = username;
             _passwordText.Text = password;
-            Login();
+            StartTask();
         }
     }
 }
