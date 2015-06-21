@@ -61,11 +61,9 @@ namespace PMA
 
         void AppointmentClick(object sender, EventArgs e)
         {
-            _typeOfAppointment = NextAppointment(_typeOfAppointment);
-            _appointmentButton.Text = _typeOfAppointment.ToString();
-            var dailyAppointment = _pmaService.FindDailyAppointment();
             var currentTimeSpan = new TimeSpan(_timePicker.CurrentHour.IntValue(), _timePicker.CurrentMinute.IntValue(), 0);
 
+            DailyAppointment dailyAppointment;
             switch (_typeOfAppointment)
             {
                 case TipoApontamento.Cheguei:
@@ -75,14 +73,18 @@ namespace PMA
                     SaveInterval(currentTimeSpan);
                     break;
                 case TipoApontamento.Voltei:
+                    dailyAppointment = _pmaService.FindDailyAppointment();
                     var intervalTime = GetInterval(currentTimeSpan);
                     _pmaService.CreateDailyAppointment(dailyAppointment.StartHour, intervalTime);
                     break;
                 case TipoApontamento.Fui:
+                    dailyAppointment = _pmaService.FindDailyAppointment();
                     _pmaService.CreateDailyAppointment(dailyAppointment.StartHour, dailyAppointment.RestHour, currentTimeSpan);
                     break;
             }
 
+            _typeOfAppointment = NextAppointment(_typeOfAppointment);
+            _appointmentButton.Text = _typeOfAppointment.ToString();
             SavePreferences();
         }
 

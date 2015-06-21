@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
+using PMA.Helper;
 
 namespace PMA
 {
@@ -51,9 +52,9 @@ namespace PMA
             {
                 token = _token,
                 data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                inicio = startHour.ToString(),
-                intervalo = "0:00",
-                fim = "0:00"
+                inicio = string.Format("{0:HH:mm}", startHour.RoundToNearest(5)),
+                intervalo = "00:00",
+                fim = "21:00"
             };
 
             return DailyAppointment(dailyAppointment);
@@ -65,9 +66,9 @@ namespace PMA
             {
                 token = _token,
                 data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                inicio = startHour.ToString(),
-                intervalo = restHour.ToString(),
-                fim = "00:00"
+                inicio = string.Format("{0:HH:mm}", startHour.RoundToNearest(5)),
+                intervalo = string.Format("{0:HH:mm}", restHour.RoundToNearest(5)),
+                fim = "21:00"
             };
 
             return DailyAppointment(dailyAppointment);
@@ -79,9 +80,9 @@ namespace PMA
             {
                 token = _token,
                 data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                inicio = startHour.ToString(),
-                intervalo = restHour.ToString(),
-                fim = endHour.ToString()
+                inicio =  string.Format("{0:HH:mm}", startHour.RoundToNearest(5)),
+                intervalo = string.Format("{0:HH:mm}", restHour.RoundToNearest(5)),
+                fim = string.Format("{0:HH:mm}", endHour.RoundToNearest(5))
             };
 
             return DailyAppointment(dailyAppointment);
@@ -109,7 +110,7 @@ namespace PMA
             };
 
             var httpClient = new HttpClient();
-            var response = httpClient.PostAsync(UrlCriarApontamentoDiario,
+            var response = httpClient.PostAsync(UrlListarApontamentosDiarios,
                 new StringContent(dailyAppointment.ToString(), Encoding.UTF8, "application/json")).Result;
             response.EnsureSuccessStatusCode();
 
