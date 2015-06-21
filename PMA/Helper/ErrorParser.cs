@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace PMA
+namespace PMA.Helper
 {
     public static class ErrorParser
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Linq;
 
-namespace PMA
+namespace PMA.Model
 {
     public class DailyAppointment
     {

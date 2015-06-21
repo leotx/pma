@@ -1,4 +1,4 @@
-namespace PMA
+namespace PMA.Model
 {
     public enum TipoApontamento
     {

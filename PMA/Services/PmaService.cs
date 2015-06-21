@@ -7,10 +7,11 @@ using System.Xml.Linq;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
 using PMA.Helper;
+using PMA.Model;
 
-namespace PMA
+namespace PMA.Services
 {
-    public class Services
+    public class PmaService
     {
         private readonly string _token;
         private const string UrlLogin = "https://dextranet.dextra.com.br/pma/services/obter_token";
@@ -18,12 +19,12 @@ namespace PMA
         private const string UrlListarApontamentosDiarios = "https://dextranet.dextra.com.br/pma/services/listar_apontamentos_diarios";
         private readonly HttpClient _httpClient;
 
-        public Services()
+        public PmaService()
         {
             _httpClient = new HttpClient(new NativeMessageHandler());
         }
 
-        public Services(string token)
+        public PmaService(string token)
         {
             _token = token;
             _httpClient = new HttpClient(new NativeMessageHandler());
@@ -129,7 +130,7 @@ namespace PMA
 
             entry.Descendants("apontamentoDiario").ToList().ForEach(xElement =>
             {
-                dailyAppointments.Add(PMA.DailyAppointment.CreateDailyAppointment(xElement));
+                dailyAppointments.Add(DailyAppointment.CreateDailyAppointment(xElement));
             });
 
             return dailyAppointments;

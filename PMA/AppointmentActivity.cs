@@ -3,6 +3,8 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using PMA.Helper;
+using PMA.Model;
 
 namespace PMA
 {
@@ -13,7 +15,7 @@ namespace PMA
         private TimePicker _timePicker;
         private TipoApontamento _typeOfAppointment;
         private ISharedPreferences _sharedPreferences;
-        private Services _pmaService;
+        private Services.PmaService _pmaService;
         const string TypeOfAppointment = "TYPE_APPOINTMENT";
         const string DateOfAppointment = "DATE_APPOINTMENT";
         const string IntervalTime = "INTERVAL_TIME";
@@ -26,7 +28,7 @@ namespace PMA
 
             var token = Intent.GetStringExtra("TOKEN");
 
-            _pmaService = new Services(token);
+            _pmaService = new Services.PmaService(token);
             _sharedPreferences = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
             _appointmentButton = FindViewById<Button>(Resource.Id.btnAppointment);
             _timePicker = FindViewById<TimePicker>(Resource.Id.timeAppointment);

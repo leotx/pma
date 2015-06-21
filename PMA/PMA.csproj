@@ -70,15 +70,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DailyAppointment.cs" />
     <Compile Include="AppointmentActivity.cs" />
-    <Compile Include="ErrorParser.cs" />
+    <Compile Include="Helper\ErrorParser.cs" />
     <Compile Include="Helper\TimeRound.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Model\DailyAppointment.cs" />
+    <Compile Include="Model\TypeOfAppointment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services.cs" />
-    <Compile Include="TypeOfAppointment.cs" />
+    <Compile Include="Services\PmaService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
