@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity"
+    tools:context=".LoginActivity"
     android:background="#ffffff">
     <LinearLayout
         android:orientation="vertical"
@@ -23,33 +23,21 @@
             android:id="@+id/imgLogo" />
         <EditText
             android:id="@+id/etUserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:background="@drawable/edittext_username"
-            android:padding="10dp"
             android:hint="Usuário"
-            android:textColorHint="#D3D3D3"
             android:drawableRight="@drawable/user"
-            android:textColor="#D3D3D3" />
+            style="@style/LoginEditText" />
         <EditText
             android:id="@+id/etPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:background="@drawable/edittext_password"
-            android:padding="10dp"
             android:hint="Senha"
-            android:textColorHint="#D3D3D3"
             android:password="true"
             android:drawableRight="@drawable/password"
-            android:textColor="#D3D3D3" />
+            style="@style/LoginEditText" />
         <Button
-            android:id="@+id/btnSingIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="4dp"
+            android:id="@+id/btnLogin"
             android:text="Entrar"
-            style="@style/DefaultButtonText"
+            style="@style/LoginButton"
             android:background="@drawable/button_login" />
         <ProgressBar
             android:layout_width="match_parent"

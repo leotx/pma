@@ -77,7 +77,7 @@ namespace PMA
 			public const int edittext_username = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int Icon = 2130837508;
+			public const int icon = 2130837508;
 			
 			// aapt resource value: 0x7f020005
 			public const int logo_dextra = 2130837509;
@@ -108,7 +108,7 @@ namespace PMA
 			public const int btnAppointment = 2131165184;
 			
 			// aapt resource value: 0x7f070005
-			public const int btnSingIn = 2131165189;
+			public const int btnLogin = 2131165189;
 			
 			// aapt resource value: 0x7f070004
 			public const int etPass = 2131165188;
@@ -177,10 +177,13 @@ namespace PMA
 		{
 			
 			// aapt resource value: 0x7f060000
-			public const int DefaultButtonText = 2131099648;
+			public const int LoginButton = 2131099648;
 			
 			// aapt resource value: 0x7f060001
-			public const int Mono_Android_Theme_Splash = 2131099649;
+			public const int LoginEditText = 2131099649;
+			
+			// aapt resource value: 0x7f060002
+			public const int Mono_Android_Theme_Splash = 2131099650;
 			
 			static Style()
 			{

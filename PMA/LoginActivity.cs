@@ -27,7 +27,7 @@ namespace PMA
 
             _usernameText = FindViewById<EditText>(Resource.Id.etUserName);
             _passwordText = FindViewById<EditText>(Resource.Id.etPass);
-            _loginButton = FindViewById<Button>(Resource.Id.btnSingIn);
+            _loginButton = FindViewById<Button>(Resource.Id.btnLogin);
             _progressBar = FindViewById<ProgressBar>(Resource.Id.pbLogin);
             _progressBar.Visibility = ViewStates.Invisible;
             

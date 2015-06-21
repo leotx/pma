@@ -29,7 +29,7 @@ public final class R {
     }
     public static final class id {
         public static final int btnAppointment=0x7f070000;
-        public static final int btnSingIn=0x7f070005;
+        public static final int btnLogin=0x7f070005;
         public static final int etPass=0x7f070004;
         public static final int etUserName=0x7f070003;
         public static final int imgLogo=0x7f070002;
@@ -45,7 +45,8 @@ public final class R {
         public static final int library_name=0x7f040000;
     }
     public static final class style {
-        public static final int DefaultButtonText=0x7f060000;
-        public static final int Mono_Android_Theme_Splash=0x7f060001;
+        public static final int LoginButton=0x7f060000;
+        public static final int LoginEditText=0x7f060001;
+        public static final int Mono_Android_Theme_Splash=0x7f060002;
     }
 }
