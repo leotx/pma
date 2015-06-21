@@ -63,25 +63,26 @@ namespace PMA
         {
             var currentTimeSpan = new TimeSpan(_timePicker.CurrentHour.IntValue(), _timePicker.CurrentMinute.IntValue(), 0);
 
-            DailyAppointment dailyAppointment;
+            var responseResult = string.Empty;
             switch (_typeOfAppointment)
             {
                 case TipoApontamento.Cheguei:
-                    _pmaService.CreateDailyAppointment(currentTimeSpan);
+                    responseResult = _pmaService.StartAppointment(currentTimeSpan);
                     break;
                 case TipoApontamento.Intervalo:
                     SaveInterval(currentTimeSpan);
                     break;
                 case TipoApontamento.Voltei:
-                    dailyAppointment = _pmaService.FindDailyAppointment();
                     var intervalTime = GetInterval(currentTimeSpan);
-                    _pmaService.CreateDailyAppointment(dailyAppointment.StartHour, intervalTime);
+                    responseResult = _pmaService.IntervalAppointment(intervalTime);
                     break;
                 case TipoApontamento.Fui:
-                    dailyAppointment = _pmaService.FindDailyAppointment();
-                    _pmaService.CreateDailyAppointment(dailyAppointment.StartHour, dailyAppointment.RestHour, currentTimeSpan);
+                    responseResult = _pmaService.EndAppointment(currentTimeSpan);
                     break;
             }
+
+            var finalMesage = responseResult.IsError() ? responseResult.GetErrorMessage() : "Apontamento criado com sucesso!";
+            RunOnUiThread(() => Toast.MakeText(this, finalMesage, ToastLength.Long).Show());
 
             _typeOfAppointment = NextAppointment(_typeOfAppointment);
             _appointmentButton.Text = _typeOfAppointment.ToString();

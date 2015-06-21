@@ -6,6 +6,5 @@ namespace PMA
         Intervalo,
         Voltei,
         Fui
-
     }
 }

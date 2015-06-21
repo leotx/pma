@@ -29,3 +29,6 @@ F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\button_appointment.xml
 F:\projects\PMA\PMA\obj\Debug\R.cs.flag
 F:\projects\PMA\PMA\obj\Debug\uploadflags.txt
 F:\projects\PMA\PMA\obj\Debug\PMA.csprojResolveAssemblyReference.cache
+F:\projects\PMA\PMA\bin\Debug\ModernHttpClient.dll
+F:\projects\PMA\PMA\bin\Debug\OkHttp.dll
+F:\projects\PMA\PMA\bin\Debug\ModernHttpClient.dll.mdb

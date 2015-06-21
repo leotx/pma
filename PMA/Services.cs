@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
+using ModernHttpClient;
 using Newtonsoft.Json.Linq;
 using PMA.Helper;
 
@@ -16,14 +16,17 @@ namespace PMA
         private const string UrlLogin = "https://dextranet.dextra.com.br/pma/services/obter_token";
         private const string UrlCriarApontamentoDiario = "https://dextranet.dextra.com.br/pma/services/criar_apontamento_diario";
         private const string UrlListarApontamentosDiarios = "https://dextranet.dextra.com.br/pma/services/listar_apontamentos_diarios";
+        private readonly HttpClient _httpClient;
 
         public Services()
         {
+            _httpClient = new HttpClient(new NativeMessageHandler());
         }
 
         public Services(string token)
         {
             _token = token;
+            _httpClient = new HttpClient(new NativeMessageHandler());
         }
 
         public string Login(string username, string password)
@@ -41,66 +44,64 @@ namespace PMA
             var response = httpClient.PostAsync(UrlLogin,
                 new StringContent(jsonLogin, Encoding.UTF8, "application/json")).Result;
 
-            response.EnsureSuccessStatusCode();
-
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        public string CreateDailyAppointment(TimeSpan startHour)
+        public string StartAppointment(TimeSpan startTime)
         {
             var dailyAppointment = new
             {
                 token = _token,
                 data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                inicio = string.Format("{0:HH:mm}", startHour.RoundToNearest(5)),
+                inicio = string.Format("{0:HH:mm}", startTime.RoundToNearest(5)),
                 intervalo = "00:00",
                 fim = "21:00"
             };
 
-            return DailyAppointment(dailyAppointment);
+            return CreateDailyAppointment(dailyAppointment);
         }
 
-        public string CreateDailyAppointment(TimeSpan startHour, TimeSpan restHour)
+        public string IntervalAppointment(TimeSpan intervalTime)
         {
+            var appointment = FindDailyAppointment();
+
             var dailyAppointment = new
             {
                 token = _token,
                 data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                inicio = string.Format("{0:HH:mm}", startHour.RoundToNearest(5)),
-                intervalo = string.Format("{0:HH:mm}", restHour.RoundToNearest(5)),
+                inicio = appointment.StartTime.ToString(),
+                intervalo = string.Format("{0:HH:mm}", intervalTime.RoundToNearest(5)),
                 fim = "21:00"
             };
 
-            return DailyAppointment(dailyAppointment);
+            return CreateDailyAppointment(dailyAppointment);
         }
 
-        public string CreateDailyAppointment(TimeSpan startHour, TimeSpan restHour, TimeSpan endHour)
+        public string EndAppointment(TimeSpan endTime)
         {
+            var appointment = FindDailyAppointment();
+
             var dailyAppointment = new
             {
                 token = _token,
                 data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                inicio =  string.Format("{0:HH:mm}", startHour.RoundToNearest(5)),
-                intervalo = string.Format("{0:HH:mm}", restHour.RoundToNearest(5)),
-                fim = string.Format("{0:HH:mm}", endHour.RoundToNearest(5))
+                inicio = appointment.StartTime.ToString(),
+                intervalo = appointment.IntervalTime.ToString(),
+                fim = string.Format("{0:HH:mm}", endTime.RoundToNearest(5))
             };
 
-            return DailyAppointment(dailyAppointment);
+            return CreateDailyAppointment(dailyAppointment);
         }
 
-        private static string DailyAppointment(object dayAppointment)
+        private string CreateDailyAppointment(object dayAppointment)
         {
-            var httpClient = new HttpClient();
-
-            var response = httpClient.PostAsync(UrlCriarApontamentoDiario,
+            var response = _httpClient.PostAsync(UrlCriarApontamentoDiario,
                 new StringContent(dayAppointment.ToString(), Encoding.UTF8, "application/json")).Result;
-
-            response.EnsureSuccessStatusCode();
 
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        public DailyAppointment FindDailyAppointment()
+        private DailyAppointment FindDailyAppointment()
         {
             var dailyAppointment = new
             {
@@ -109,10 +110,8 @@ namespace PMA
                 dataFinal = string.Format("{0:yyyy-MM-dd}", DateTime.Now)
             };
 
-            var httpClient = new HttpClient();
-            var response = httpClient.PostAsync(UrlListarApontamentosDiarios,
+            var response = _httpClient.PostAsync(UrlListarApontamentosDiarios,
                 new StringContent(dailyAppointment.ToString(), Encoding.UTF8, "application/json")).Result;
-            response.EnsureSuccessStatusCode();
 
             var responseString = response.Content.ReadAsStringAsync().Result;
 

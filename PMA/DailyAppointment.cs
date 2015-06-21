@@ -6,23 +6,23 @@ namespace PMA
     public class DailyAppointment
     {
         public DateTime? DateOfAppointment { get; internal set; }
-        public TimeSpan StartHour { get; internal set; }
-        public TimeSpan EndHour { get; internal set; }
-        public TimeSpan RestHour { get; internal set; }
+        public TimeSpan StartTime { get; internal set; }
+        public TimeSpan EndTime { get; internal set; }
+        public TimeSpan IntervalTime { get; internal set; }
 
         public static DailyAppointment CreateDailyAppointment(XElement xElement)
         {
             var dateOfAppointment = xElement.Element("data");
-            var startHour = xElement.Element("inicio");
-            var endHour = xElement.Element("fim");
-            var restHour = xElement.Element("intervalo");
+            var startTime = xElement.Element("inicio");
+            var endTime = xElement.Element("fim");
+            var restTime = xElement.Element("intervalo");
 
             return new DailyAppointment
             {
                 DateOfAppointment = dateOfAppointment == null ? (DateTime?)null : DateTime.Parse(dateOfAppointment.Value),
-                StartHour = startHour == null ? new TimeSpan() : TimeSpan.Parse(startHour.Value),
-                EndHour = endHour == null ? new TimeSpan() : TimeSpan.Parse(endHour.Value),
-                RestHour = restHour == null ? new TimeSpan() : TimeSpan.Parse(restHour.Value)
+                StartTime = startTime == null ? new TimeSpan() : TimeSpan.Parse(startTime.Value),
+                EndTime = endTime == null ? new TimeSpan() : TimeSpan.Parse(endTime.Value),
+                IntervalTime = restTime == null ? new TimeSpan() : TimeSpan.Parse(restTime.Value)
             };
         }
     }
