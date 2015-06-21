@@ -95,8 +95,10 @@ namespace PMA
 
         private string CreateDailyAppointment(object dayAppointment)
         {
+            var jsonAppointment = JObject.FromObject(dayAppointment).ToString();
+
             var response = _httpClient.PostAsync(UrlCriarApontamentoDiario,
-                new StringContent(dayAppointment.ToString(), Encoding.UTF8, "application/json")).Result;
+                new StringContent(jsonAppointment, Encoding.UTF8, "application/json")).Result;
 
             return response.Content.ReadAsStringAsync().Result;
         }
