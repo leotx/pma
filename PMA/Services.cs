@@ -11,9 +11,19 @@ namespace PMA
 {
     public class Services
     {
+        private readonly string _token;
         private const string UrlLogin = "https://dextranet.dextra.com.br/pma/services/obter_token";
         private const string UrlCriarApontamentoDiario = "https://dextranet.dextra.com.br/pma/services/criar_apontamento_diario";
         private const string UrlListarApontamentosDiarios = "https://dextranet.dextra.com.br/pma/services/listar_apontamentos_diarios";
+
+        public Services()
+        {
+        }
+
+        public Services(string token)
+        {
+            _token = token;
+        }
 
         public string Login(string username, string password)
         {
@@ -35,12 +45,12 @@ namespace PMA
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        public string CreateDailyAppointment(string token, DateTime dateAppointment, TimeSpan startHour)
+        public string CreateDailyAppointment(TimeSpan startHour)
         {
             var dailyAppointment = new
             {
-                token,
-                data = string.Format("{0:yyyy-MM-dd}", dateAppointment),
+                token = _token,
+                data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
                 inicio = startHour.ToString(),
                 intervalo = "0:00",
                 fim = "0:00"
@@ -49,12 +59,12 @@ namespace PMA
             return DailyAppointment(dailyAppointment);
         }
 
-        public string CreateDailyAppointment(string token, DateTime dateAppointment, TimeSpan startHour, TimeSpan restHour)
+        public string CreateDailyAppointment(TimeSpan startHour, TimeSpan restHour)
         {
             var dailyAppointment = new
             {
-                token,
-                data = string.Format("{0:yyyy-MM-dd}", dateAppointment),
+                token = _token,
+                data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
                 inicio = startHour.ToString(),
                 intervalo = restHour.ToString(),
                 fim = "00:00"
@@ -63,12 +73,12 @@ namespace PMA
             return DailyAppointment(dailyAppointment);
         }
 
-        public string CreateDailyAppointment(string token, DateTime dateAppointment, TimeSpan startHour, TimeSpan restHour, TimeSpan endHour)
+        public string CreateDailyAppointment(TimeSpan startHour, TimeSpan restHour, TimeSpan endHour)
         {
             var dailyAppointment = new
             {
-                token,
-                data = string.Format("{0:yyyy-MM-dd}", dateAppointment),
+                token = _token,
+                data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
                 inicio = startHour.ToString(),
                 intervalo = restHour.ToString(),
                 fim = endHour.ToString()
@@ -89,13 +99,13 @@ namespace PMA
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        public List<DailyAppointment> FindDailyAppointments(string token, DateTime startDate, DateTime endDate)
+        public DailyAppointment FindDailyAppointment()
         {
             var dailyAppointment = new
             {
-                token,
-                dataInicial = string.Format("{0:yyyy-MM-dd}", startDate),
-                dataFinal = string.Format("{0:yyyy-MM-dd}", endDate)
+                token = _token,
+                dataInicial = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
+                dataFinal = string.Format("{0:yyyy-MM-dd}", DateTime.Now)
             };
 
             var httpClient = new HttpClient();
@@ -105,7 +115,9 @@ namespace PMA
 
             var responseString = response.Content.ReadAsStringAsync().Result;
 
-            return PopulateDailyAppointment(responseString);
+            var populatedList = PopulateDailyAppointment(responseString);
+
+            return populatedList != null ? populatedList[0] : null;
         }
 
         private static List<DailyAppointment> PopulateDailyAppointment(string response)

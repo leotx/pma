@@ -10,8 +10,10 @@ namespace PMA
     public class AppointmentActivity : Activity
     {
         private Button _appointmentButton;
+        private TimePicker _timePicker;
         private TipoApontamento _typeOfAppointment;
         private ISharedPreferences _sharedPreferences;
+        private Services _pmaService;
         const string TypeOfAppointment = "TYPE_APPOINTMENT";
         const string DateOfAppointment = "DATE_APPOINTMENT";
 
@@ -21,12 +23,14 @@ namespace PMA
 
             SetContentView(Resource.Layout.Appointment);
 
+            var token = Intent.GetStringExtra("TOKEN");
+
+            _pmaService = new Services(token);
             _sharedPreferences = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
             _appointmentButton = FindViewById<Button>(Resource.Id.btnAppointment);
+            _timePicker = FindViewById<TimePicker>(Resource.Id.timeAppointment);
             _appointmentButton.Click += AppointmentClick;
             ValidateTypeOfAppointment();
-
-            var token = Intent.GetStringExtra("TOKEN");
         }
 
         private void ValidateTypeOfAppointment()
@@ -58,11 +62,12 @@ namespace PMA
         {
             _typeOfAppointment = NextAppointment(_typeOfAppointment);
             _appointmentButton.Text = _typeOfAppointment.ToString();
+            var dailyAppointment = _pmaService.FindDailyAppointment();
 
-            var servicePma = new Services();
             switch (_typeOfAppointment)
             {
                 case TipoApontamento.Cheguei:
+                    _pmaService.CreateDailyAppointment(new TimeSpan(_timePicker.CurrentHour.IntValue(), _timePicker.CurrentMinute.IntValue(), 0));
                     break;
                 case TipoApontamento.Intervalo:
                     break;
@@ -71,8 +76,6 @@ namespace PMA
                 case TipoApontamento.Fui:
                     break;
             }
-
-            //var response = servicePma.CreateDayAppointment(_usernameText.Text.Trim(), _passwordText.Text.Trim());
 
             SavePreferences();
         }
