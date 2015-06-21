@@ -71,11 +71,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppointmentActivity.cs" />
+    <Compile Include="BroadcastNetwork.cs" />
     <Compile Include="Helper\ErrorParser.cs" />
     <Compile Include="Helper\TimeRound.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="Model\DailyAppointment.cs" />
     <Compile Include="Model\TypeOfAppointment.cs" />
+    <Compile Include="NetworkVerify.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PmaService.cs" />

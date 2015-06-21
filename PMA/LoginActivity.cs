@@ -25,6 +25,7 @@ namespace PMA
 
             SetContentView(Resource.Layout.Login);
 
+
             _usernameText = FindViewById<EditText>(Resource.Id.etUserName);
             _passwordText = FindViewById<EditText>(Resource.Id.etPass);
             _loginButton = FindViewById<Button>(Resource.Id.btnLogin);
@@ -60,6 +61,8 @@ namespace PMA
             if (tokenData != null)
             {
                 SavePreferences();
+                var networkVerify = new NetworkVerify();
+                networkVerify.Start();
                 var appointmentActivity = new Intent(this, typeof (AppointmentActivity));
                 appointmentActivity.PutExtra("TOKEN", tokenData);
                 StartActivity(appointmentActivity);

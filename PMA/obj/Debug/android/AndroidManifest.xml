@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="PMA.PMA" android:versionCode="1" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="PMA.PMA" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
   <uses-sdk android:minSdkVersion="11" />
-  <application android:label="PMA" android:icon="@drawable/icon" android:name="mono.android.app.Application" android:debuggable="true">
+  <application android:label="PMA" android:name="mono.android.app.Application" android:debuggable="true">
     <activity android:label="Apontamento" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity" />
+    <receiver android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.BroadcastNetwork" />
     <activity android:icon="@drawable/icon" android:label="PMA" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="PMA.PMA.mono.MonoRuntimeProvider.__mono_init__" />
     <receiver android:name="mono.android.Seppuku">
@@ -18,6 +19,8 @@
       </intent-filter>
     </activity>
   </application>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>
