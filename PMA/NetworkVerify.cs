@@ -9,6 +9,7 @@ namespace PMA
     public class NetworkVerify
     {
         private BroadcastNetwork _broadcastReceiver;
+        private const string DefaultSsid = "DXT-MOBILE";
 
         public void Start()
         {
@@ -24,12 +25,12 @@ namespace PMA
         static void OnNetworkStatusChanged(object sender, EventArgs e)
         {
             var wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-            var conntectedBssid = wifiManager.ConnectionInfo.BSSID;
-            if (conntectedBssid == "")
-            {
-                var notification = new Notification();
-                notification.Notify();
-            }
+            var wifiSsid = wifiManager.ConnectionInfo.SSID;
+
+            if (!wifiSsid.Contains(DefaultSsid)) return;
+            
+            var notification = new Notification();
+            notification.Notify();
         }
     }
 }

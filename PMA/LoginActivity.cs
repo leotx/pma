@@ -25,6 +25,8 @@ namespace PMA
 
             SetContentView(Resource.Layout.Login);
 
+            var networkVerify = new NetworkVerify();
+            networkVerify.Start();
 
             _usernameText = FindViewById<EditText>(Resource.Id.etUserName);
             _passwordText = FindViewById<EditText>(Resource.Id.etPass);
@@ -61,8 +63,6 @@ namespace PMA
             if (tokenData != null)
             {
                 SavePreferences();
-                var networkVerify = new NetworkVerify();
-                networkVerify.Start();
                 var appointmentActivity = new Intent(this, typeof (AppointmentActivity));
                 appointmentActivity.PutExtra("TOKEN", tokenData);
                 StartActivity(appointmentActivity);

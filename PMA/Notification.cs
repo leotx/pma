@@ -1,5 +1,6 @@
 using Android.App;
 using Android.Content;
+using Android.Media;
 using Android.Support.V4.App;
 
 namespace PMA
@@ -22,6 +23,8 @@ namespace PMA
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle("Você está na Dextra!")
                 .SetSmallIcon(Resource.Drawable.logo_dextra)
+                .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Alarm))
+                .SetDefaults((int) (NotificationDefaults.Sound | NotificationDefaults.Vibrate))
                 .SetContentText("Não esqueça de apontar! :)");
 
             var notificationManager = (NotificationManager)Application.Context.GetSystemService(Context.NotificationService);
