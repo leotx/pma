@@ -2,10 +2,10 @@ PMA.AppointmentActivity, PMA;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActi
 PMA.AppointmentActivity, PMA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity
 PMA.AppointmentActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity
 pma.AppointmentActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity
-PMA.MainActivity, PMA;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
-PMA.MainActivity, PMA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
-PMA.MainActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
-pma.MainActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.MainActivity
+PMA.LoginActivity, PMA;md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity
+PMA.LoginActivity, PMA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity
+PMA.LoginActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity
+pma.LoginActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity
 ModernHttpClient.AwaitableOkHttp/OkTaskCallback, ModernHttpClient;md595f4b8ab717b9da13f11267a86077f20.AwaitableOkHttp_OkTaskCallback
 ModernHttpClient.AwaitableOkHttp/OkTaskCallback, ModernHttpClient, Version=2.4.2.0, Culture=neutral, PublicKeyToken=null;md595f4b8ab717b9da13f11267a86077f20.AwaitableOkHttp_OkTaskCallback
 ModernHttpClient.AwaitableOkHttp.OkTaskCallback;md595f4b8ab717b9da13f11267a86077f20.AwaitableOkHttp_OkTaskCallback

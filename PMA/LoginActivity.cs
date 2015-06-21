@@ -12,7 +12,7 @@ using Android.Widget;
 namespace PMA
 {
     [Activity(Label = "PMA", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    public class LoginActivity : Activity
     {
         private EditText _passwordText;
         private EditText _usernameText;
@@ -23,12 +23,12 @@ namespace PMA
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.Login);
 
             _usernameText = FindViewById<EditText>(Resource.Id.etUserName);
             _passwordText = FindViewById<EditText>(Resource.Id.etPass);
             _loginButton = FindViewById<Button>(Resource.Id.btnSingIn);
-            _progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
+            _progressBar = FindViewById<ProgressBar>(Resource.Id.pbLogin);
             _progressBar.Visibility = ViewStates.Invisible;
             
             _loginButton.Click += LoginClick;

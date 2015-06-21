@@ -15,26 +15,33 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="10dp">
+        <ImageView
+            android:src="@drawable/logo_dextra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/imgLogo" />
         <EditText
             android:id="@+id/etUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_top_bg"
+            android:background="@drawable/edittext_username"
             android:padding="10dp"
-            android:hint="E-Mail"
-            android:textColorHint="#cccccc"
-            android:drawableLeft="@drawable/email" />
+            android:hint="Usuário"
+            android:textColorHint="#D3D3D3"
+            android:drawableRight="@drawable/user"
+            android:textColor="#D3D3D3" />
         <EditText
             android:id="@+id/etPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_bottom_bg"
-            android:layout_marginTop="-2dp"
+            android:background="@drawable/edittext_password"
             android:padding="10dp"
             android:hint="Senha"
-            android:textColorHint="#cccccc"
+            android:textColorHint="#D3D3D3"
             android:password="true"
-            android:drawableLeft="@drawable/password" />
+            android:drawableRight="@drawable/password"
+            android:textColor="#D3D3D3" />
         <Button
             android:id="@+id/btnSingIn"
             android:layout_width="match_parent"
@@ -43,10 +50,10 @@
             android:layout_margin="4dp"
             android:text="Entrar"
             style="@style/DefaultButtonText"
-            android:background="@drawable/button_default_bg" />
+            android:background="@drawable/button_login" />
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBar1" />
+            android:id="@+id/pbLogin" />
     </LinearLayout>
 </RelativeLayout>
