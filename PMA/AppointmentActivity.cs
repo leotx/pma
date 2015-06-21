@@ -7,7 +7,7 @@ using Android.Widget;
 namespace PMA
 {
     [Activity(Label = "Apontamento")]
-    public class Appointment : Activity
+    public class AppointmentActivity : Activity
     {
         private Button _appointmentButton;
         private TipoApontamento _typeOfAppointment;
@@ -58,6 +58,21 @@ namespace PMA
         {
             _typeOfAppointment = NextAppointment(_typeOfAppointment);
             _appointmentButton.Text = _typeOfAppointment.ToString();
+
+            var servicePma = new Services();
+            switch (_typeOfAppointment)
+            {
+                case TipoApontamento.Cheguei:
+                    break;
+                case TipoApontamento.Intervalo:
+                    break;
+                case TipoApontamento.Voltei:
+                    break;
+                case TipoApontamento.Fui:
+                    break;
+            }
+
+            //var response = servicePma.CreateDayAppointment(_usernameText.Text.Trim(), _passwordText.Text.Trim());
 
             SavePreferences();
         }

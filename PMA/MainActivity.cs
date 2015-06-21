@@ -60,7 +60,7 @@ namespace PMA
             if (tokenData != null)
             {
                 SavePreferences();
-                var appointmentActivity = new Intent(this, typeof (Appointment));
+                var appointmentActivity = new Intent(this, typeof (AppointmentActivity));
                 appointmentActivity.PutExtra("TOKEN", tokenData);
                 StartActivity(appointmentActivity);
             }
