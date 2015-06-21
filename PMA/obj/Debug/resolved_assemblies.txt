@@ -4,6 +4,7 @@ F:\projects\PMA\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+
 F:\projects\PMA\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll
 F:\projects\PMA\packages\Microsoft.Net.Http.2.2.29\lib\monoandroid\System.Net.Http.Extensions.dll
 F:\projects\PMA\packages\Microsoft.Net.Http.2.2.29\lib\monoandroid\System.Net.Http.Primitives.dll
+F:\projects\PMA\packages\Xamarin.Android.Support.v4.22.2.0.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll
 C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\System.Collections.Concurrent.dll
 C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\System.Collections.dll
 C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\System.ComponentModel.Annotations.dll

@@ -85,6 +85,7 @@ class MonoPackageManager_Resources {
 		"OkHttp.dll",
 		"System.Net.Http.Extensions.dll",
 		"System.Net.Http.Primitives.dll",
+		"Xamarin.Android.Support.v4.dll",
 		"System.Collections.Concurrent.dll",
 		"System.Collections.dll",
 		"System.ComponentModel.Annotations.dll",

@@ -25,6 +25,11 @@ namespace PMA
         {
             var wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
             var conntectedBssid = wifiManager.ConnectionInfo.BSSID;
+            if (conntectedBssid == "")
+            {
+                var notification = new Notification();
+                notification.Notify();
+            }
         }
     }
 }

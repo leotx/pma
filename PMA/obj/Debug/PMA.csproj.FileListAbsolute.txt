@@ -30,3 +30,4 @@ F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\edittext_username.xml
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\logo_dextra.png
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\password.png
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\user.png
+F:\projects\PMA\PMA\bin\Debug\Xamarin.Android.Support.v4.dll
