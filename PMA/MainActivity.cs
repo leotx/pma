@@ -11,7 +11,7 @@ using Android.Widget;
 
 namespace PMA
 {
-    [Activity(Label = "Login PMA", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "PMA", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private EditText _passwordText;
