@@ -11,7 +11,7 @@ using Android.Widget;
 
 namespace PMA
 {
-    [Activity(Label = "PMA", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Login PMA", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private EditText _passwordText;
@@ -37,6 +37,9 @@ namespace PMA
 
         void LoginClick(object sender, EventArgs e)
         {
+            var inputManager = (InputMethodManager)GetSystemService(InputMethodService);
+            inputManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, HideSoftInputFlags.NotAlways);
+
             StartTask();
         }
 
@@ -50,15 +53,13 @@ namespace PMA
 
         private void Login()
         {
-            var inputManager = (InputMethodManager)GetSystemService(InputMethodService);
-            inputManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, HideSoftInputFlags.NotAlways);
-
             var servicePma = new Services();
             var response = servicePma.Login(_usernameText.Text.Trim(), _passwordText.Text.Trim());
 
             var tokenData = GetToken(response);
             if (tokenData != null)
             {
+                SavePreferences();
                 var appointmentActivity = new Intent(this, typeof (Appointment));
                 appointmentActivity.PutExtra("TOKEN", tokenData);
                 StartActivity(appointmentActivity);
@@ -69,10 +70,8 @@ namespace PMA
             }
         }
 
-        protected override void OnDestroy()
+        private void SavePreferences()
         {
-            base.OnDestroy();
-
             var prefs = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
             var prefEditor = prefs.Edit();
             prefEditor.PutString("USERNAME", _usernameText.Text);
