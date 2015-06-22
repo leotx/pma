@@ -42,15 +42,15 @@ namespace PMA
 
             if (dateOfAppointment.Date == DateTime.Now.Date)
             {
-                var typeOfAppointment = (TipoApontamento)_sharedPreferences.GetInt(TypeOfAppointment, 0);
-                _appointmentButton.Text = typeOfAppointment.ToString();
+                _typeOfAppointment = (TipoApontamento)_sharedPreferences.GetInt(TypeOfAppointment, 0);
             }
             else
             {
                 _typeOfAppointment = TipoApontamento.Cheguei;
-                _appointmentButton.Text = _typeOfAppointment.ToString();
                 SavePreferences();
             }
+
+            _appointmentButton.Text = _typeOfAppointment.ToString();
         }
 
         private void SavePreferences()

@@ -94,9 +94,9 @@ namespace PMA.Services
             return CreateDailyAppointment(dailyAppointment);
         }
 
-        private string CreateDailyAppointment(object dayAppointment)
+        private string CreateDailyAppointment(object dailyAppointment)
         {
-            var jsonAppointment = JObject.FromObject(dayAppointment).ToString();
+            var jsonAppointment = JObject.FromObject(dailyAppointment).ToString();
 
             var response = _httpClient.PostAsync(UrlCriarApontamentoDiario,
                 new StringContent(jsonAppointment, Encoding.UTF8, "application/json")).Result;
@@ -113,8 +113,10 @@ namespace PMA.Services
                 dataFinal = string.Format("{0:yyyy-MM-dd}", DateTime.Now)
             };
 
+            var jsonAppointment = JObject.FromObject(dailyAppointment).ToString();
+
             var response = _httpClient.PostAsync(UrlListarApontamentosDiarios,
-                new StringContent(dailyAppointment.ToString(), Encoding.UTF8, "application/json")).Result;
+                new StringContent(jsonAppointment, Encoding.UTF8, "application/json")).Result;
 
             var responseString = response.Content.ReadAsStringAsync().Result;
 
