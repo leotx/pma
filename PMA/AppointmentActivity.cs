@@ -2,6 +2,7 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using PMA.Helper;
 using PMA.Model;
@@ -13,7 +14,8 @@ namespace PMA
     {
         private Button _appointmentButton;
         private TimePicker _timePicker;
-        private TipoApontamento _typeOfAppointment;
+        private AppointmentType _typeOfAppointment;
+        private TextView _endOfJourneyTextView;
         private ISharedPreferences _sharedPreferences;
         private Services.PmaService _pmaService;
         const string TypeOfAppointment = "TYPE_APPOINTMENT";
@@ -32,6 +34,8 @@ namespace PMA
             _sharedPreferences = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
             _appointmentButton = FindViewById<Button>(Resource.Id.btnAppointment);
             _timePicker = FindViewById<TimePicker>(Resource.Id.timeAppointment);
+            _endOfJourneyTextView = FindViewById<TextView>(Resource.Id.txtEndOfJourney);
+            _endOfJourneyTextView.Visibility = ViewStates.Invisible;
             _appointmentButton.Click += AppointmentClick;
             ValidateTypeOfAppointment();
         }
@@ -42,15 +46,25 @@ namespace PMA
 
             if (dateOfAppointment.Date == DateTime.Now.Date)
             {
-                _typeOfAppointment = (TipoApontamento)_sharedPreferences.GetInt(TypeOfAppointment, 0);
+                _typeOfAppointment = (AppointmentType)_sharedPreferences.GetInt(TypeOfAppointment, 0);
+                ValidateEndOfJourney();
             }
             else
             {
-                _typeOfAppointment = TipoApontamento.Cheguei;
+                _typeOfAppointment = AppointmentType.Cheguei;
                 SavePreferences();
             }
 
             _appointmentButton.Text = _typeOfAppointment.ToString();
+        }
+
+        private void ValidateEndOfJourney()
+        {
+            if (_typeOfAppointment != AppointmentType.Fim) return;
+
+            _endOfJourneyTextView.Visibility = ViewStates.Visible;
+            _appointmentButton.Visibility = ViewStates.Invisible;
+            _timePicker.Visibility = ViewStates.Invisible;
         }
 
         private void SavePreferences()
@@ -68,17 +82,17 @@ namespace PMA
             var responseResult = string.Empty;
             switch (_typeOfAppointment)
             {
-                case TipoApontamento.Cheguei:
+                case AppointmentType.Cheguei:
                     responseResult = _pmaService.StartAppointment(currentTimeSpan);
                     break;
-                case TipoApontamento.Intervalo:
+                case AppointmentType.Intervalo:
                     SaveInterval(currentTimeSpan);
                     break;
-                case TipoApontamento.Voltei:
+                case AppointmentType.Voltei:
                     var intervalTime = GetInterval(currentTimeSpan);
                     responseResult = _pmaService.IntervalAppointment(intervalTime);
                     break;
-                case TipoApontamento.Fui:
+                case AppointmentType.Fui:
                     responseResult = _pmaService.EndAppointment(currentTimeSpan);
                     break;
             }
@@ -89,6 +103,7 @@ namespace PMA
             _typeOfAppointment = NextAppointment(_typeOfAppointment);
             _appointmentButton.Text = _typeOfAppointment.ToString();
             SavePreferences();
+            ValidateEndOfJourney();
         }
 
         private TimeSpan GetInterval(TimeSpan currentTimeSpan)
@@ -104,9 +119,9 @@ namespace PMA
             prefEditor.Commit();
         }
 
-        private static TipoApontamento NextAppointment(TipoApontamento typeAppointment)
+        private static AppointmentType NextAppointment(AppointmentType typeAppointment)
         {
-            var arrayList = (TipoApontamento[])Enum.GetValues(typeof(TipoApontamento));
+            var arrayList = (AppointmentType[])Enum.GetValues(typeof(AppointmentType));
             var indexArray = Array.IndexOf(arrayList, typeAppointment) + 1;
             return (arrayList.Length == indexArray) ? arrayList[0] : arrayList[indexArray];
         }

@@ -4,6 +4,13 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center">
+    <TextView
+        android:text="Fim da Jornada Diária."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/txtEndOfJourney" />
     <Button
         android:id="@+id/btnAppointment"
         android:text="Cheguei"

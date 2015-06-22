@@ -80,7 +80,7 @@
     <Compile Include="Helper\TimeRound.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="Model\DailyAppointment.cs" />
-    <Compile Include="Model\TypeOfAppointment.cs" />
+    <Compile Include="Model\AppointmentType.cs" />
     <Compile Include="NetworkVerify.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

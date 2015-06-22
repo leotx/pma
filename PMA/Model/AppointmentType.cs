@@ -1,10 +1,11 @@
 namespace PMA.Model
 {
-    public enum TipoApontamento
+    public enum AppointmentType
     {
         Cheguei,
         Intervalo,
         Voltei,
-        Fui
+        Fui,
+        Fim
     }
 }

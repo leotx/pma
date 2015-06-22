@@ -104,26 +104,29 @@ namespace PMA
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070000
-			public const int btnAppointment = 2131165184;
-			
-			// aapt resource value: 0x7f070005
-			public const int btnLogin = 2131165189;
-			
-			// aapt resource value: 0x7f070004
-			public const int etPass = 2131165188;
-			
-			// aapt resource value: 0x7f070003
-			public const int etUserName = 2131165187;
-			
-			// aapt resource value: 0x7f070002
-			public const int imgLogo = 2131165186;
+			// aapt resource value: 0x7f070001
+			public const int btnAppointment = 2131165185;
 			
 			// aapt resource value: 0x7f070006
-			public const int pbLogin = 2131165190;
+			public const int btnLogin = 2131165190;
 			
-			// aapt resource value: 0x7f070001
-			public const int timeAppointment = 2131165185;
+			// aapt resource value: 0x7f070005
+			public const int etPass = 2131165189;
+			
+			// aapt resource value: 0x7f070004
+			public const int etUserName = 2131165188;
+			
+			// aapt resource value: 0x7f070003
+			public const int imgLogo = 2131165187;
+			
+			// aapt resource value: 0x7f070007
+			public const int pbLogin = 2131165191;
+			
+			// aapt resource value: 0x7f070002
+			public const int timeAppointment = 2131165186;
+			
+			// aapt resource value: 0x7f070000
+			public const int txtEndOfJourney = 2131165184;
 			
 			static Id()
 			{
