@@ -11,7 +11,7 @@ namespace PMA
         {
         }
 
-        public void Notify()
+        public void Notify(string contentTitle)
         {
             var intent = new Intent(Application.Context, typeof(LoginActivity));
 
@@ -21,7 +21,7 @@ namespace PMA
             var builder = new NotificationCompat.Builder(Application.Context)
                 .SetAutoCancel(true)
                 .SetContentIntent(pendingIntent)
-                .SetContentTitle("Você está na Dextra!")
+                .SetContentTitle(contentTitle)
                 .SetSmallIcon(Resource.Drawable.logo_dextra)
                 .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Alarm))
                 .SetDefaults((int) (NotificationDefaults.Sound | NotificationDefaults.Vibrate))

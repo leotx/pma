@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Paths>
-  <AdditionalAndroidResourcePaths></AdditionalAndroidResourcePaths>
-  <AdditionalJavaLibraryReferences></AdditionalJavaLibraryReferences>
+  <AdditionalAndroidResourcePaths>C:\Users\Avell G1711 NEW\AppData\Local\Xamarin\Android.Support.v4\22.2.0\embedded</AdditionalAndroidResourcePaths>
+  <AdditionalJavaLibraryReferences>C:\Users\Avell G1711 NEW\AppData\Local\Xamarin\Android.Support.v4\22.2.0\embedded\classes.jar;C:\Users\Avell G1711 NEW\AppData\Local\Xamarin\Android.Support.v4\22.2.0\embedded\libs\internal_impl-22.2.0.jar</AdditionalJavaLibraryReferences>
   <AdditionalNativeLibraryReferences></AdditionalNativeLibraryReferences>
 </Paths>

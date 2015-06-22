@@ -10,6 +10,7 @@ namespace PMA
     {
         private BroadcastNetwork _broadcastReceiver;
         private const string DefaultSsid = "DXT-MOBILE";
+        private static bool _isValidSsid;
 
         public void Start()
         {
@@ -27,10 +28,20 @@ namespace PMA
             var wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
             var wifiSsid = wifiManager.ConnectionInfo.SSID;
 
-            if (!wifiSsid.Contains(DefaultSsid)) return;
-            
             var notification = new Notification();
-            notification.Notify();
+
+            if (_isValidSsid)
+            {
+                if (wifiSsid.Contains(DefaultSsid)) return;
+                
+                notification.Notify("Você saiu da Dextra!");
+                _isValidSsid = false;
+            }
+            else if (wifiSsid.Contains(DefaultSsid))
+            {
+                notification.Notify("Você está na Dextra!");
+                _isValidSsid = true;
+            }
         }
     }
 }
