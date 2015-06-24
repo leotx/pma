@@ -58,6 +58,14 @@ namespace PMA
             _appointmentButton.Text = _typeOfAppointment.ToString();
         }
 
+        protected override void OnRestart()
+        {
+            base.OnRestart();
+
+            var loginActivity = new Intent(this, typeof(LoginActivity));
+            StartActivity(loginActivity);
+        }
+
         private void ValidateEndOfJourney()
         {
             if (_typeOfAppointment != AppointmentType.Fim) return;
