@@ -28,18 +28,16 @@ namespace PMA
             var wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
             var wifiSsid = wifiManager.ConnectionInfo.SSID;
 
-            var notification = new Notification();
-
             if (_isValidSsid)
             {
                 if (wifiSsid.Contains(DefaultSsid)) return;
                 
-                notification.Notify("Você saiu da Dextra!");
+                Notification.Notify("Você saiu da Dextra!");
                 _isValidSsid = false;
             }
             else if (wifiSsid.Contains(DefaultSsid))
             {
-                notification.Notify("Você está na Dextra!");
+                Notification.Notify("Você está na Dextra!");
                 _isValidSsid = true;
             }
         }

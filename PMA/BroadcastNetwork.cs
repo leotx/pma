@@ -10,8 +10,7 @@ namespace PMA
 
         public override void OnReceive(Context context, Intent intent)
         {
-            if (ConnectionStatusChanged != null)
-                ConnectionStatusChanged(this, EventArgs.Empty);
+            ConnectionStatusChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

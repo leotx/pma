@@ -5,13 +5,9 @@ using Android.Support.V4.App;
 
 namespace PMA
 {
-    public class Notification
+    public static class Notification
     {
-        public Notification()
-        {
-        }
-
-        public void Notify(string contentTitle)
+        public static void Notify(string contentTitle)
         {
             var intent = new Intent(Application.Context, typeof(LoginActivity));
 
