@@ -4,5 +4,6 @@
     <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
     <ProjectView>ShowAllFiles</ProjectView>
     <SelectedDevice>Sony D6633</SelectedDevice>
+    <AndroidDesignerPreferredTheme>Theme.Material.Light</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

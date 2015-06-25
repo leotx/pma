@@ -9,7 +9,7 @@
         android:width="1dp"
         android:color="#d2d2d2" />
       <corners
-        android:radius="1dp" />
+        android:radius="5dp" />
     </shape>
   </item>
   <item>
@@ -22,7 +22,7 @@
         android:width="1dp"
         android:color="#d2d2d2" />
       <corners
-        android:radius="1dp" />
+        android:radius="5dp" />
     </shape>
   </item>
 </selector>

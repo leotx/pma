@@ -45,11 +45,11 @@ namespace PMA
 		public partial class Dimension
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int activity_horizontal_margin = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int activity_horizontal_margin = 2131034112;
 			
-			// aapt resource value: 0x7f040001
-			public const int activity_vertical_margin = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int activity_vertical_margin = 2131034113;
 			
 			static Dimension()
 			{
@@ -89,7 +89,10 @@ namespace PMA
 			public const int password = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int user = 2130837512;
+			public const int transparent_linearlayout = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int user = 2130837513;
 			
 			static Drawable()
 			{
@@ -120,7 +123,10 @@ namespace PMA
 			public const int imgLogo = 2131165187;
 			
 			// aapt resource value: 0x7f070007
-			public const int pbLogin = 2131165191;
+			public const int linearLayout = 2131165191;
+			
+			// aapt resource value: 0x7f070008
+			public const int pbLogin = 2131165192;
 			
 			// aapt resource value: 0x7f070002
 			public const int timeAppointment = 2131165186;
@@ -160,11 +166,11 @@ namespace PMA
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int app_name = 2131034112;
+			// aapt resource value: 0x7f040001
+			public const int app_name = 2130968577;
 			
-			// aapt resource value: 0x7f050001
-			public const int library_name = 2131034113;
+			// aapt resource value: 0x7f040000
+			public const int library_name = 2130968576;
 			
 			static String()
 			{

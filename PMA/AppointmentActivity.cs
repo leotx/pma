@@ -9,7 +9,7 @@ using PMA.Model;
 
 namespace PMA
 {
-    [Activity(Label = "Apontamento")]
+    [Activity(Label = "Apontamento", Icon = "@drawable/icon")]
     public class AppointmentActivity : Activity
     {
         private Button _appointmentButton;

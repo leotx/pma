@@ -17,7 +17,7 @@ namespace PMA
         private EditText _passwordText;
         private EditText _usernameText;
         private Button _loginButton;
-        private ProgressBar _progressBar;
+        private LinearLayout _linearLayout;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -30,8 +30,8 @@ namespace PMA
             _usernameText = FindViewById<EditText>(Resource.Id.etUserName);
             _passwordText = FindViewById<EditText>(Resource.Id.etPass);
             _loginButton = FindViewById<Button>(Resource.Id.btnLogin);
-            _progressBar = FindViewById<ProgressBar>(Resource.Id.pbLogin);
-            _progressBar.Visibility = ViewStates.Invisible;
+            _linearLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout);
+            _linearLayout.Visibility = ViewStates.Invisible;
             
             _loginButton.Click += LoginClick;
             LoadPreferences();
@@ -47,10 +47,10 @@ namespace PMA
 
         private void StartTask()
         {
-            _progressBar.Visibility = ViewStates.Visible;
+            _linearLayout.Visibility = ViewStates.Visible;
             var task = new Task(Login);
             task.Start();
-            task.ContinueWith(x => { _progressBar.Visibility = ViewStates.Gone; });
+            task.ContinueWith(x => { _linearLayout.Visibility = ViewStates.Gone; });
         }
 
         private void Login()

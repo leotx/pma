@@ -20,7 +20,6 @@ F:\projects\PMA\PMA\obj\Debug\res\values\strings.xml
 F:\projects\PMA\PMA\obj\Debug\res\values\dimens.xml
 F:\projects\PMA\PMA\obj\Debug\R.cs.flag
 F:\projects\PMA\PMA\obj\Debug\uploadflags.txt
-F:\projects\PMA\PMA\obj\Debug\PMA.csprojResolveAssemblyReference.cache
 F:\projects\PMA\PMA\obj\Debug\res\layout\login.xml
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\icon.png
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\button_appointment.xml
@@ -31,3 +30,4 @@ F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\logo_dextra.png
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\password.png
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\user.png
 F:\projects\PMA\PMA\bin\Debug\Xamarin.Android.Support.v4.dll
+F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\transparent_linearlayout.xml
