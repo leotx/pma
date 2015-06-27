@@ -24,7 +24,7 @@ namespace PMA.Helper
         public static string GetErrorMessage(this string response)
         {
             var errorMessage = XDocument.Parse(response).Descendants("erro").FirstOrDefault();
-            return errorMessage != null ? errorMessage.Value : string.Empty;
+            return errorMessage?.Value ?? string.Empty;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Android.App;
 using Android.Content;
 using Android.Media;
@@ -24,7 +25,7 @@ namespace PMA
                 .SetContentText("Não esqueça de apontar! :)");
 
             var notificationManager = (NotificationManager)Application.Context.GetSystemService(Context.NotificationService);
-            notificationManager.Notify(0, builder.Build());
+            notificationManager.Notify(Guid.NewGuid().GetHashCode(), builder.Build());
         }
     }
 }

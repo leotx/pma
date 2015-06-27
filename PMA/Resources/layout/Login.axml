@@ -48,6 +48,7 @@
         android:layout_height="242dp"
         android:layout_centerInParent="true"
         android:background="#99d3d3d3"
+        android:radius="5dp"
         android:gravity="center"
         android:id="@+id/linearLayout">
         <ProgressBar
