@@ -3,7 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 
-namespace PMA
+namespace PMA.Notification
 {
     [Service]
     public class NotificationService : Service

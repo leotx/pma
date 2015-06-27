@@ -4,7 +4,7 @@ using Android.Content;
 using Android.Net;
 using Android.Net.Wifi;
 
-namespace PMA
+namespace PMA.Notification
 {
     public class NetworkVerify
     {
