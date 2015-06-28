@@ -44,8 +44,7 @@ namespace PMA.Services
 
             var jsonLogin = JObject.FromObject(loginData).ToString();
 
-            var response = httpClient.PostAsync(UrlLogin,
-                new StringContent(jsonLogin, Encoding.UTF8, "application/json")).Result;
+            var response = httpClient.PostAsync(UrlLogin, new StringContent(jsonLogin, Encoding.UTF8, "application/json")).Result;
 
             return response.Content.ReadAsStringAsync().Result;
         }

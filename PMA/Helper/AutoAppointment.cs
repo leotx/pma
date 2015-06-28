@@ -10,7 +10,7 @@ namespace PMA.Helper
 
         public AutoAppointment()
         {
-            Login();
+            _pmaService = new PmaService();
         }
 
         private void Login()
@@ -18,7 +18,9 @@ namespace PMA.Helper
             var username = Preferences.Shared.GetString(Preferences.Username, null);
             var password = Preferences.Shared.GetString(Preferences.Password, null);
             var response = _pmaService.Login(username.Trim(), password.Trim());
-            _pmaService = new PmaService(response.GetToken());
+            var tokenData = response.GetToken();
+            if (tokenData != null)
+                _pmaService = new PmaService(tokenData);
         }
 
         public void VerifyAppointment()
@@ -26,11 +28,14 @@ namespace PMA.Helper
             var autoPointActivated = Preferences.Shared.GetBoolean(Preferences.AutoPointActivated, false);
             if (!autoPointActivated) return;
 
+            Login();
             MakeAppointment();
         }
 
         private void MakeAppointment()
         {
+            if (_pmaService == null) return;
+
             var appointment = new Appointment();
             appointment.ValidateAppointment();
             if (appointment.AppointmentType != AppointmentType.Cheguei) return;
@@ -53,6 +58,8 @@ namespace PMA.Helper
             if (lastNotification <= 0) return;
 
             var dateOfAppointment = new DateTime(lastNotification);
+            if (dateOfAppointment.Date == DateTime.Now.Date) return;
+
             var currentTimeSpan = new TimeSpan(dateOfAppointment.Hour, dateOfAppointment.Minute, 0);
             _pmaService.DateOfAppointment = dateOfAppointment;
             _pmaService.EndAppointment(currentTimeSpan);

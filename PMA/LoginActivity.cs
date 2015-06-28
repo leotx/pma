@@ -27,7 +27,7 @@ namespace PMA
 
             SetContentView(Resource.Layout.Login);
 
-            StartService(new Intent(this, typeof (NotificationService)));
+            StartService(new Intent(this, typeof(NotificationService)));
 
             _usernameText = FindViewById<EditText>(Resource.Id.etUserName);
             _passwordText = FindViewById<EditText>(Resource.Id.etPass);

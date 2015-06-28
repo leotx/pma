@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Net;
@@ -11,7 +12,7 @@ namespace PMA.Notification
     {
         private BroadcastNetwork _broadcastReceiver;
         private static AutoAppointment _autoPoint;
-        private const string DefaultSsid = "DXT-MOBILE";
+        private const string DefaultSsid = "4P705";
         private static bool _isValidSsid;
 
         public void Start()
