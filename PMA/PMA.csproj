@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppointmentActivity.cs" />
+    <Compile Include="ConfigurationActivity.cs" />
     <Compile Include="Helper\Appointment.cs" />
     <Compile Include="Helper\AutoAppointment.cs" />
     <Compile Include="Helper\ErrorParser.cs" />
@@ -95,6 +96,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\Appointment.axml" />
+    <AndroidResource Include="Resources\layout\Configuration.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Login.axml" />

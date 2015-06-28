@@ -3,6 +3,7 @@
   <uses-sdk android:minSdkVersion="11" />
   <application android:label="PMA" android:name="mono.android.app.Application" android:debuggable="true">
     <activity android:icon="@drawable/icon" android:label="Apontamento" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity" />
+    <activity android:icon="@drawable/icon" android:label="ConfigurationActivity" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.ConfigurationActivity" />
     <activity android:icon="@drawable/icon" android:label="PMA" android:theme="@android:style/Theme.Holo.NoActionBar.TranslucentDecor" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity" />
     <receiver android:name="md59a97fbe5a84f439e890e1bef993a2d05.BroadcastNetwork" />
     <service android:name="md59a97fbe5a84f439e890e1bef993a2d05.NotificationService" />

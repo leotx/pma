@@ -38,6 +38,25 @@ namespace PMA
             ValidateAppointment();
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            menu.Add(0, 0, 0, "Configurações");
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case 0:
+                    var loginActivity = new Intent(this, typeof(ConfigurationActivity));
+                    StartActivity(loginActivity);
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
+
         private void ValidateAppointment()
         {
             _appointmentHelper.ValidateAppointment();

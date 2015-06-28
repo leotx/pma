@@ -2,6 +2,10 @@ PMA.AppointmentActivity, PMA;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActi
 PMA.AppointmentActivity, PMA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity
 PMA.AppointmentActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity
 pma.AppointmentActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity
+PMA.ConfigurationActivity, PMA;md51323aa3d64a4ef9f67ac88f4ab8ea406.ConfigurationActivity
+PMA.ConfigurationActivity, PMA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51323aa3d64a4ef9f67ac88f4ab8ea406.ConfigurationActivity
+PMA.ConfigurationActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.ConfigurationActivity
+pma.ConfigurationActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.ConfigurationActivity
 PMA.LoginActivity, PMA;md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity
 PMA.LoginActivity, PMA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity
 PMA.LoginActivity;md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity
