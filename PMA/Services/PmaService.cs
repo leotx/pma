@@ -18,9 +18,11 @@ namespace PMA.Services
         private const string UrlCriarApontamentoDiario = "https://dextranet.dextra.com.br/pma/services/criar_apontamento_diario";
         private const string UrlListarApontamentosDiarios = "https://dextranet.dextra.com.br/pma/services/listar_apontamentos_diarios";
         private readonly HttpClient _httpClient;
+        public DateTime DateOfAppointment { get; set; }
 
         public PmaService()
         {
+            DateOfAppointment = DateTime.Now;
             _httpClient = new HttpClient(new NativeMessageHandler());
         }
 
@@ -53,7 +55,7 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                data = $"{DateTime.Now:yyyy-MM-dd}",
+                data = $"{DateOfAppointment:yyyy-MM-dd}",
                 inicio = $"{startTime.RoundToNearest(5):HH:mm}",
                 intervalo = "00:00",
                 fim = "21:00"
@@ -69,7 +71,7 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                data = $"{DateTime.Now:yyyy-MM-dd}",
+                data = $"{DateOfAppointment:yyyy-MM-dd}",
                 inicio = appointment.StartTime.ToString(),
                 intervalo = $"{intervalTime.RoundToNearest(5):HH:mm}",
                 fim = "21:00"
@@ -85,7 +87,7 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                data = $"{DateTime.Now:yyyy-MM-dd}",
+                data = $"{DateOfAppointment:yyyy-MM-dd}",
                 inicio = appointment.StartTime.ToString(),
                 intervalo = appointment.IntervalTime.ToString(),
                 fim = $"{endTime.RoundToNearest(5):HH:mm}"
@@ -109,8 +111,8 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                dataInicial = $"{DateTime.Now:yyyy-MM-dd}",
-                dataFinal = $"{DateTime.Now:yyyy-MM-dd}"
+                dataInicial = $"{DateOfAppointment:yyyy-MM-dd}",
+                dataFinal = $"{DateOfAppointment:yyyy-MM-dd}"
             };
 
             var jsonAppointment = JObject.FromObject(dailyAppointment).ToString();

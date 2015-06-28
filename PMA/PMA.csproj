@@ -78,6 +78,7 @@
     <Compile Include="Helper\Appointment.cs" />
     <Compile Include="Helper\AutoPoint.cs" />
     <Compile Include="Helper\ErrorParser.cs" />
+    <Compile Include="Helper\Login.cs" />
     <Compile Include="Helper\TimeRound.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="Model\DailyAppointment.cs" />
@@ -119,7 +120,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\edittext_password.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\edittext_username.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\edittext_username.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\logo_dextra.png" />

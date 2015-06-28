@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Android.App;
@@ -8,6 +9,7 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using PMA.Helper;
 using PMA.Notification;
 
 namespace PMA
@@ -19,6 +21,9 @@ namespace PMA
         private EditText _usernameText;
         private Button _loginButton;
         private LinearLayout _linearLayout;
+        private const string Username = "USERNAME";
+        private const string Password = "PASSWORD";
+        private ISharedPreferences _sharedPreferences;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -33,7 +38,8 @@ namespace PMA
             _loginButton = FindViewById<Button>(Resource.Id.btnLogin);
             _linearLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout);
             _linearLayout.Visibility = ViewStates.Invisible;
-            
+            _sharedPreferences = Application.Context.GetSharedPreferences(Assembly.GetExecutingAssembly().GetName().Name, FileCreationMode.Private);
+
             _loginButton.Click += LoginClick;
             LoadPreferences();
         }
@@ -59,7 +65,7 @@ namespace PMA
             var servicePma = new Services.PmaService();
             var response = servicePma.Login(_usernameText.Text.Trim(), _passwordText.Text.Trim());
 
-            var tokenData = GetToken(response);
+            var tokenData = response.GetToken();
             if (tokenData != null)
             {
                 SavePreferences();
@@ -75,24 +81,16 @@ namespace PMA
 
         private void SavePreferences()
         {
-            var prefs = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
-            var prefEditor = prefs.Edit();
-            prefEditor.PutString("USERNAME", _usernameText.Text);
-            prefEditor.PutString("PASSWORD", _passwordText.Text);
+            var prefEditor = _sharedPreferences.Edit();
+            prefEditor.PutString(Username, _usernameText.Text);
+            prefEditor.PutString(Password, _passwordText.Text);
             prefEditor.Commit();
-        }
-
-        private static string GetToken(string response)
-        {
-            var token = XDocument.Parse(response).Descendants("token").FirstOrDefault();
-            return token?.Value;
         }
 
         private void LoadPreferences()
         {
-            var prefs = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
-            var username = prefs.GetString("USERNAME", null);
-            var password = prefs.GetString("PASSWORD", null);
+            var username = _sharedPreferences.GetString(Username, null);
+            var password = _sharedPreferences.GetString(Password, null);
 
             if (username == null || password == null) return;
             

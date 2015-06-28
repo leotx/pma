@@ -3,12 +3,14 @@ using Android.App;
 using Android.Content;
 using Android.Net;
 using Android.Net.Wifi;
+using PMA.Helper;
 
 namespace PMA.Notification
 {
     public class NetworkVerify
     {
         private BroadcastNetwork _broadcastReceiver;
+        private static AutoPoint _autoPoint;
         private const string DefaultSsid = "DXT-MOBILE";
         private static bool _isValidSsid;
 
@@ -18,6 +20,8 @@ namespace PMA.Notification
 
             _broadcastReceiver = new BroadcastNetwork();
             _broadcastReceiver.ConnectionStatusChanged += OnNetworkStatusChanged;
+
+            _autoPoint = new AutoPoint();
 
             Application.Context.RegisterReceiver(_broadcastReceiver,
                 new IntentFilter(ConnectivityManager.ConnectivityAction));
@@ -33,11 +37,13 @@ namespace PMA.Notification
                 if (wifiSsid.Contains(DefaultSsid)) return;
                 
                 Notification.Notify("Você saiu da Dextra!");
+                _autoPoint.SaveLastNotification();
                 _isValidSsid = false;
             }
             else if (wifiSsid.Contains(DefaultSsid))
             {
                 Notification.Notify("Você está na Dextra!");
+                _autoPoint.VerifyAppointment();
                 _isValidSsid = true;
             }
         }
