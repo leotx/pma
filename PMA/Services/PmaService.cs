@@ -53,8 +53,8 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                inicio = string.Format("{0:HH:mm}", startTime.RoundToNearest(5)),
+                data = $"{DateTime.Now:yyyy-MM-dd}",
+                inicio = $"{startTime.RoundToNearest(5):HH:mm}",
                 intervalo = "00:00",
                 fim = "21:00"
             };
@@ -69,9 +69,9 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
+                data = $"{DateTime.Now:yyyy-MM-dd}",
                 inicio = appointment.StartTime.ToString(),
-                intervalo = string.Format("{0:HH:mm}", intervalTime.RoundToNearest(5)),
+                intervalo = $"{intervalTime.RoundToNearest(5):HH:mm}",
                 fim = "21:00"
             };
 
@@ -85,10 +85,10 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                data = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
+                data = $"{DateTime.Now:yyyy-MM-dd}",
                 inicio = appointment.StartTime.ToString(),
                 intervalo = appointment.IntervalTime.ToString(),
-                fim = string.Format("{0:HH:mm}", endTime.RoundToNearest(5))
+                fim = $"{endTime.RoundToNearest(5):HH:mm}"
             };
 
             return CreateDailyAppointment(dailyAppointment);
@@ -109,8 +109,8 @@ namespace PMA.Services
             var dailyAppointment = new
             {
                 token = _token,
-                dataInicial = string.Format("{0:yyyy-MM-dd}", DateTime.Now),
-                dataFinal = string.Format("{0:yyyy-MM-dd}", DateTime.Now)
+                dataInicial = $"{DateTime.Now:yyyy-MM-dd}",
+                dataFinal = $"{DateTime.Now:yyyy-MM-dd}"
             };
 
             var jsonAppointment = JObject.FromObject(dailyAppointment).ToString();
@@ -122,7 +122,7 @@ namespace PMA.Services
 
             var populatedList = PopulateDailyAppointment(responseString);
 
-            return populatedList != null ? populatedList[0] : null;
+            return populatedList?[0];
         }
 
         private static List<DailyAppointment> PopulateDailyAppointment(string response)

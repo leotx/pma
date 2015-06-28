@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using PMA.Notification;
 
 namespace PMA
 {
@@ -84,7 +85,7 @@ namespace PMA
         private static string GetToken(string response)
         {
             var token = XDocument.Parse(response).Descendants("token").FirstOrDefault();
-            return token != null ? token.Value : null;
+            return token?.Value;
         }
 
         private void LoadPreferences()

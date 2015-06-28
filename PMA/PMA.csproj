@@ -75,15 +75,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppointmentActivity.cs" />
-    <Compile Include="BroadcastNetwork.cs" />
+    <Compile Include="Helper\Appointment.cs" />
+    <Compile Include="Helper\AutoPoint.cs" />
     <Compile Include="Helper\ErrorParser.cs" />
     <Compile Include="Helper\TimeRound.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="Model\DailyAppointment.cs" />
     <Compile Include="Model\AppointmentType.cs" />
-    <Compile Include="NetworkVerify.cs" />
-    <Compile Include="Notification.cs" />
-    <Compile Include="NotificationService.cs" />
+    <Compile Include="Notification\BroadcastNetwork.cs" />
+    <Compile Include="Notification\NetworkVerify.cs" />
+    <Compile Include="Notification\Notification.cs" />
+    <Compile Include="Notification\NotificationService.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PmaService.cs" />
