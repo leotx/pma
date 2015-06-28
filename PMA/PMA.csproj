@@ -76,9 +76,10 @@
   <ItemGroup>
     <Compile Include="AppointmentActivity.cs" />
     <Compile Include="Helper\Appointment.cs" />
-    <Compile Include="Helper\AutoPoint.cs" />
+    <Compile Include="Helper\AutoAppointment.cs" />
     <Compile Include="Helper\ErrorParser.cs" />
     <Compile Include="Helper\Login.cs" />
+    <Compile Include="Helper\Preferences.cs" />
     <Compile Include="Helper\TimeRound.cs" />
     <Compile Include="LoginActivity.cs" />
     <Compile Include="Model\DailyAppointment.cs" />

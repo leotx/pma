@@ -1,7 +1,4 @@
 using System;
-using System.Reflection;
-using Android.App;
-using Android.Content;
 using PMA.Model;
 
 namespace PMA.Helper
@@ -9,22 +6,14 @@ namespace PMA.Helper
     public class Appointment
     {
         public AppointmentType AppointmentType { get; private set; }
-        public readonly ISharedPreferences SharedPreferences;
-        const string TypeOfAppointment = "TYPE_APPOINTMENT";
-        const string DateOfAppointment = "DATE_APPOINTMENT";
-
-        public Appointment()
-        {
-            SharedPreferences = Application.Context.GetSharedPreferences(Assembly.GetExecutingAssembly().GetName().Name, FileCreationMode.Private);
-        }
 
         public void ValidateAppointment()
         {
-            var dateOfAppointment = new DateTime(SharedPreferences.GetLong(DateOfAppointment, 0));
+            var dateOfAppointment = new DateTime(Preferences.Shared.GetLong(Preferences.DateOfAppointment, 0));
 
             if (dateOfAppointment.Date == DateTime.Now.Date)
             {
-                AppointmentType = (AppointmentType)SharedPreferences.GetInt(TypeOfAppointment, 0);
+                AppointmentType = (AppointmentType)Preferences.Shared.GetInt(Preferences.TypeOfAppointment, 0);
             }
             else
             {
@@ -35,9 +24,9 @@ namespace PMA.Helper
 
         private void SavePreferences()
         {
-            var prefEditor = SharedPreferences.Edit();
-            prefEditor.PutInt(TypeOfAppointment, (int)AppointmentType);
-            prefEditor.PutLong(DateOfAppointment, DateTime.Now.Ticks);
+            var prefEditor = Preferences.Shared.Edit();
+            prefEditor.PutInt(Preferences.TypeOfAppointment, (int)AppointmentType);
+            prefEditor.PutLong(Preferences.DateOfAppointment, DateTime.Now.Ticks);
             prefEditor.Commit();
         }
 

@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -19,7 +18,6 @@ namespace PMA
         private TextView _endOfJourneyTextView;
         private Appointment _appointmentHelper;
         private PmaService _pmaService;
-        const string IntervalTime = "INTERVAL_TIME";
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -101,16 +99,16 @@ namespace PMA
             return responseResult;
         }
 
-        private TimeSpan GetInterval(TimeSpan currentTimeSpan)
+        private static TimeSpan GetInterval(TimeSpan currentTimeSpan)
         {
-            var intervalTime = TimeSpan.Parse(_appointmentHelper.SharedPreferences.GetString(IntervalTime, null));
+            var intervalTime = TimeSpan.Parse(Preferences.Shared.GetString(Preferences.IntervalTime, null));
             return currentTimeSpan - intervalTime;
         }
 
-        private void SaveInterval(TimeSpan currentTimeSpan)
+        private static void SaveInterval(TimeSpan currentTimeSpan)
         {
-            var prefEditor = _appointmentHelper.SharedPreferences.Edit();
-            prefEditor.PutString(IntervalTime, currentTimeSpan.ToString());
+            var prefEditor = Preferences.Shared.Edit();
+            prefEditor.PutString(Preferences.IntervalTime, currentTimeSpan.ToString());
             prefEditor.Commit();
         }
     }

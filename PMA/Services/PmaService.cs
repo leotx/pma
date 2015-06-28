@@ -18,7 +18,7 @@ namespace PMA.Services
         private const string UrlCriarApontamentoDiario = "https://dextranet.dextra.com.br/pma/services/criar_apontamento_diario";
         private const string UrlListarApontamentosDiarios = "https://dextranet.dextra.com.br/pma/services/listar_apontamentos_diarios";
         private readonly HttpClient _httpClient;
-        public DateTime DateOfAppointment { get; set; }
+        public DateTime DateOfAppointment { private get; set; }
 
         public PmaService()
         {

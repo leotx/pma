@@ -10,7 +10,7 @@ namespace PMA.Notification
     public class NetworkVerify
     {
         private BroadcastNetwork _broadcastReceiver;
-        private static AutoPoint _autoPoint;
+        private static AutoAppointment _autoPoint;
         private const string DefaultSsid = "DXT-MOBILE";
         private static bool _isValidSsid;
 
@@ -21,7 +21,7 @@ namespace PMA.Notification
             _broadcastReceiver = new BroadcastNetwork();
             _broadcastReceiver.ConnectionStatusChanged += OnNetworkStatusChanged;
 
-            _autoPoint = new AutoPoint();
+            _autoPoint = new AutoAppointment();
 
             Application.Context.RegisterReceiver(_broadcastReceiver,
                 new IntentFilter(ConnectivityManager.ConnectivityAction));
