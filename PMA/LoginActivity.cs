@@ -57,8 +57,8 @@ namespace PMA
 
         private void Login()
         {
-            var servicePma = new PmaService();
-            var response = servicePma.Login(_usernameText.Text.Trim(), _passwordText.Text.Trim());
+            var loginService = new LoginService();
+            var response = loginService.Login(_usernameText.Text.Trim(), _passwordText.Text.Trim());
 
             var tokenData = response.GetToken();
             if (tokenData != null)

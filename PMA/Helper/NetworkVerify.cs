@@ -9,20 +9,20 @@ namespace PMA.Helper
 {
     public class NetworkVerify
     {
-        private BroadcastNetwork _broadcastReceiver;
-        private static AutoAppointment _autoAppointment;
+        private BroadcastNetwork BroadcastReceiver { get; set; }
+        private static AutoAppointment AutoAppointment { get; set; }
         private const string DefaultSsid = "DXT-MOBILE";
 
         public void Start()
         {
-            if (_broadcastReceiver != null) return;
+            if (BroadcastReceiver != null) return;
 
-            _broadcastReceiver = new BroadcastNetwork();
-            _broadcastReceiver.ConnectionStatusChanged += OnNetworkStatusChanged;
+            BroadcastReceiver = new BroadcastNetwork();
+            BroadcastReceiver.ConnectionStatusChanged += OnNetworkStatusChanged;
 
-            _autoAppointment = new AutoAppointment();
+            AutoAppointment = new AutoAppointment();
 
-            Application.Context.RegisterReceiver(_broadcastReceiver,
+            Application.Context.RegisterReceiver(BroadcastReceiver,
                 new IntentFilter(ConnectivityManager.ConnectivityAction));
         }
 
@@ -38,13 +38,13 @@ namespace PMA.Helper
                 if (wifiSsid.Contains(DefaultSsid)) return;
                 
                 Notification.Notification.Notify("Você saiu da Dextra!");
-                _autoAppointment.SaveLastDate();
+                AutoAppointment.SaveLastDate();
                 isValidSsid = false;
             }
             else if (wifiSsid.Contains(DefaultSsid))
             {
                 Notification.Notification.Notify("Você está na Dextra!");
-                _autoAppointment.VerifyAppointment();
+                AutoAppointment.VerifyAppointment();
                 isValidSsid = true;
             }
 

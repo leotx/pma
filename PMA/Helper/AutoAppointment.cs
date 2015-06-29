@@ -6,21 +6,22 @@ namespace PMA.Helper
 {
     public class AutoAppointment
     {
-        private PmaService _pmaService;
+        private AppointmentService AppointmentService { get; set; }
+        private LoginService LoginService { get; }
 
         public AutoAppointment()
         {
-            _pmaService = new PmaService();
+            LoginService = new LoginService();
         }
 
         private void Login()
         {
             var username = Preferences.Shared.GetString(Preferences.Username, null);
             var password = Preferences.Shared.GetString(Preferences.Password, null);
-            var response = _pmaService.Login(username.Trim(), password.Trim());
+            var response = LoginService.Login(username.Trim(), password.Trim());
             var tokenData = response.GetToken();
             if (tokenData != null)
-                _pmaService = new PmaService(tokenData);
+                AppointmentService = new AppointmentService(tokenData);
         }
 
         public void VerifyAppointment()
@@ -34,7 +35,7 @@ namespace PMA.Helper
 
         private void MakeAppointment()
         {
-            if (_pmaService == null) return;
+            if (AppointmentService == null) return;
 
             var appointment = new Appointment();
             appointment.ValidateAppointment();
@@ -65,14 +66,14 @@ namespace PMA.Helper
             var differenceTimeSpan = DateTime.Now - dateOfAppointment.Value;
             if (differenceTimeSpan.TotalMinutes < minimumInterval) return false;
 
-            _pmaService.IntervalAppointment(differenceTimeSpan);
+            AppointmentService.IntervalAppointment(differenceTimeSpan);
             return true;
         }
 
         private void StartAppointment()
         {
             var currentTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
-            _pmaService.StartAppointment(currentTimeSpan);
+            AppointmentService.StartAppointment(currentTimeSpan);
         }
 
         private void EndAppointment()
@@ -82,8 +83,8 @@ namespace PMA.Helper
             if (!dateOfAppointment.HasValue || dateOfAppointment.Value.Date == DateTime.Now.Date) return;
 
             var currentTimeSpan = new TimeSpan(dateOfAppointment.Value.Hour, dateOfAppointment.Value.Minute, 0);
-            _pmaService.DateOfAppointment = dateOfAppointment.Value;
-            _pmaService.EndAppointment(currentTimeSpan);
+            AppointmentService.DateOfAppointment = dateOfAppointment.Value;
+            AppointmentService.EndAppointment(currentTimeSpan);
         }
 
         private static DateTime? GetLastDate()

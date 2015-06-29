@@ -17,7 +17,7 @@ namespace PMA
         private TimePicker _timePicker;
         private TextView _endOfJourneyTextView;
         private Appointment _appointmentHelper;
-        private PmaService _pmaService;
+        private AppointmentService _appointmentService;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -28,7 +28,7 @@ namespace PMA
             var token = Intent.GetStringExtra("TOKEN");
 
             _appointmentHelper = new Appointment();
-            _pmaService = new PmaService(token);
+            _appointmentService = new AppointmentService(token);
             _appointmentButton = FindViewById<Button>(Resource.Id.btnAppointment);
             _timePicker = FindViewById<TimePicker>(Resource.Id.timeAppointment);
             _endOfJourneyTextView = FindViewById<TextView>(Resource.Id.txtEndOfJourney);
@@ -101,17 +101,17 @@ namespace PMA
             switch (_appointmentHelper.AppointmentType)
             {
                 case AppointmentType.Cheguei:
-                    responseResult = _pmaService.StartAppointment(currentTimeSpan);
+                    responseResult = _appointmentService.StartAppointment(currentTimeSpan);
                     break;
                 case AppointmentType.Intervalo:
                     SaveInterval(currentTimeSpan);
                     break;
                 case AppointmentType.Voltei:
                     var intervalTime = GetInterval(currentTimeSpan);
-                    responseResult = _pmaService.IntervalAppointment(intervalTime);
+                    responseResult = _appointmentService.IntervalAppointment(intervalTime);
                     break;
                 case AppointmentType.Fui:
-                    responseResult = _pmaService.EndAppointment(currentTimeSpan);
+                    responseResult = _appointmentService.EndAppointment(currentTimeSpan);
                     break;
             }
 

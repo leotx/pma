@@ -11,50 +11,26 @@ using PMA.Model;
 
 namespace PMA.Services
 {
-    public class PmaService
+    public class AppointmentService
     {
-        private readonly string _token;
-        private const string UrlLogin = "https://dextranet.dextra.com.br/pma/services/obter_token";
+        private string Token { get; }
+        private HttpClient HttpClient { get; }
+        public DateTime DateOfAppointment { private get; set; }
         private const string UrlCriarApontamentoDiario = "https://dextranet.dextra.com.br/pma/services/criar_apontamento_diario";
         private const string UrlListarApontamentosDiarios = "https://dextranet.dextra.com.br/pma/services/listar_apontamentos_diarios";
-        private readonly HttpClient _httpClient;
-        public DateTime DateOfAppointment { private get; set; }
 
-        public PmaService()
+        public AppointmentService(string token)
         {
+            Token = token;
             DateOfAppointment = DateTime.Now;
-            _httpClient = new HttpClient(new NativeMessageHandler());
-        }
-
-        public PmaService(string token)
-        {
-            _token = token;
-            DateOfAppointment = DateTime.Now;
-            _httpClient = new HttpClient(new NativeMessageHandler());
-        }
-
-        public string Login(string username, string password)
-        {
-            var loginData = new
-            {
-                username,
-                password
-            };
-
-            var httpClient = new HttpClient();
-
-            var jsonLogin = JObject.FromObject(loginData).ToString();
-
-            var response = httpClient.PostAsync(UrlLogin, new StringContent(jsonLogin, Encoding.UTF8, "application/json")).Result;
-
-            return response.Content.ReadAsStringAsync().Result;
+            HttpClient = new HttpClient(new NativeMessageHandler());
         }
 
         public string StartAppointment(TimeSpan startTime)
         {
             var dailyAppointment = new
             {
-                token = _token,
+                token = Token,
                 data = $"{DateOfAppointment:yyyy-MM-dd}",
                 inicio = $"{startTime.RoundToNearest(5):HH:mm}",
                 intervalo = "00:00",
@@ -72,7 +48,7 @@ namespace PMA.Services
 
             var dailyAppointment = new
             {
-                token = _token,
+                token = Token,
                 data = $"{DateOfAppointment:yyyy-MM-dd}",
                 inicio = appointment.StartTime.ToString(),
                 intervalo = $"{totalIntervalTime.RoundToNearest(5):HH:mm}",
@@ -88,7 +64,7 @@ namespace PMA.Services
 
             var dailyAppointment = new
             {
-                token = _token,
+                token = Token,
                 data = $"{DateOfAppointment:yyyy-MM-dd}",
                 inicio = appointment.StartTime.ToString(),
                 intervalo = appointment.IntervalTime.ToString(),
@@ -102,7 +78,7 @@ namespace PMA.Services
         {
             var jsonAppointment = JObject.FromObject(dailyAppointment).ToString();
 
-            var response = _httpClient.PostAsync(UrlCriarApontamentoDiario,
+            var response = HttpClient.PostAsync(UrlCriarApontamentoDiario,
                 new StringContent(jsonAppointment, Encoding.UTF8, "application/json")).Result;
 
             return response.Content.ReadAsStringAsync().Result;
@@ -112,14 +88,14 @@ namespace PMA.Services
         {
             var dailyAppointment = new
             {
-                token = _token,
+                token = Token,
                 dataInicial = $"{DateOfAppointment:yyyy-MM-dd}",
                 dataFinal = $"{DateOfAppointment:yyyy-MM-dd}"
             };
 
             var jsonAppointment = JObject.FromObject(dailyAppointment).ToString();
 
-            var response = _httpClient.PostAsync(UrlListarApontamentosDiarios,
+            var response = HttpClient.PostAsync(UrlListarApontamentosDiarios,
                 new StringContent(jsonAppointment, Encoding.UTF8, "application/json")).Result;
 
             var responseString = response.Content.ReadAsStringAsync().Result;
