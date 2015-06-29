@@ -58,8 +58,10 @@ namespace PMA.Helper
             var dateOfAppointment = GetLastDate();
             if (!dateOfAppointment.HasValue) return false;
 
+            var minimumInterval = Preferences.Shared.GetInt(Preferences.MinimumInterval, 20);
+
             var differenceTimeSpan = DateTime.Now - dateOfAppointment.Value;
-            if (differenceTimeSpan.TotalMinutes < 20) return false;
+            if (differenceTimeSpan.TotalMinutes < minimumInterval) return false;
 
             _pmaService.IntervalAppointment(differenceTimeSpan);
             return true;
