@@ -25,23 +25,26 @@ public final class R {
         public static final int logo_dextra=0x7f020005;
         public static final int monoandroidsplash=0x7f020006;
         public static final int password=0x7f020007;
-        public static final int transparent_linearlayout=0x7f020008;
-        public static final int user=0x7f020009;
+        public static final int progressbar=0x7f020008;
+        public static final int transparent_linearlayout=0x7f020009;
+        public static final int user=0x7f02000a;
     }
     public static final class id {
         public static final int btnAppointment=0x7f070001;
-        public static final int btnLogin=0x7f070006;
-        public static final int etPass=0x7f070005;
-        public static final int etUserName=0x7f070004;
-        public static final int imgLogo=0x7f070003;
-        public static final int linearLayout=0x7f070007;
-        public static final int pbLogin=0x7f070008;
+        public static final int btnLogin=0x7f070007;
+        public static final int chkAutoAppointment=0x7f070003;
+        public static final int etPass=0x7f070006;
+        public static final int etUserName=0x7f070005;
+        public static final int imgLogo=0x7f070004;
+        public static final int linearLayout=0x7f070008;
+        public static final int pbLogin=0x7f070009;
         public static final int timeAppointment=0x7f070002;
         public static final int txtEndOfJourney=0x7f070000;
     }
     public static final class layout {
         public static final int appointment=0x7f030000;
-        public static final int login=0x7f030001;
+        public static final int configuration=0x7f030001;
+        public static final int login=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

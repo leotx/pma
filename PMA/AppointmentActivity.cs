@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using PMA.Helper;
 using PMA.Model;
+using PMA.Services;
 
 namespace PMA
 {
@@ -14,13 +15,9 @@ namespace PMA
     {
         private Button _appointmentButton;
         private TimePicker _timePicker;
-        private AppointmentType _typeOfAppointment;
         private TextView _endOfJourneyTextView;
-        private ISharedPreferences _sharedPreferences;
-        private Services.PmaService _pmaService;
-        const string TypeOfAppointment = "TYPE_APPOINTMENT";
-        const string DateOfAppointment = "DATE_APPOINTMENT";
-        const string IntervalTime = "INTERVAL_TIME";
+        private Appointment _appointmentHelper;
+        private AppointmentService _appointmentService;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -30,32 +27,41 @@ namespace PMA
 
             var token = Intent.GetStringExtra("TOKEN");
 
-            _pmaService = new Services.PmaService(token);
-            _sharedPreferences = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
+            _appointmentHelper = new Appointment();
+            _appointmentService = new AppointmentService(token);
             _appointmentButton = FindViewById<Button>(Resource.Id.btnAppointment);
             _timePicker = FindViewById<TimePicker>(Resource.Id.timeAppointment);
             _endOfJourneyTextView = FindViewById<TextView>(Resource.Id.txtEndOfJourney);
             _endOfJourneyTextView.Visibility = ViewStates.Invisible;
             _appointmentButton.Click += AppointmentClick;
-            ValidateTypeOfAppointment();
+
+            ValidateAppointment();
         }
 
-        private void ValidateTypeOfAppointment()
+        public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            var dateOfAppointment = new DateTime(_sharedPreferences.GetLong(DateOfAppointment, 0));
+            menu.Add(0, 0, 0, "Configurações");
+            return true;
+        }
 
-            if (dateOfAppointment.Date == DateTime.Now.Date)
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
             {
-                _typeOfAppointment = (AppointmentType)_sharedPreferences.GetInt(TypeOfAppointment, 0);
-                ValidateEndOfJourney();
+                case 0:
+                    var configurationActivity = new Intent(this, typeof(ConfigurationActivity));
+                    StartActivity(configurationActivity);
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
             }
-            else
-            {
-                _typeOfAppointment = AppointmentType.Cheguei;
-                SavePreferences();
-            }
+        }
 
-            _appointmentButton.Text = _typeOfAppointment.ToString();
+        private void ValidateAppointment()
+        {
+            _appointmentHelper.ValidateAppointment();
+            _appointmentButton.Text = _appointmentHelper.AppointmentType.ToString();
+            ValidateEndOfJourney();
         }
 
         protected override void OnRestart()
@@ -68,70 +74,61 @@ namespace PMA
 
         private void ValidateEndOfJourney()
         {
-            if (_typeOfAppointment != AppointmentType.Fim) return;
+            if (_appointmentHelper.AppointmentType != AppointmentType.Fim) return;
 
             _endOfJourneyTextView.Visibility = ViewStates.Visible;
             _appointmentButton.Visibility = ViewStates.Invisible;
             _timePicker.Visibility = ViewStates.Invisible;
         }
 
-        private void SavePreferences()
-        {
-            var prefEditor = _sharedPreferences.Edit();
-            prefEditor.PutInt(TypeOfAppointment, (int)_typeOfAppointment);
-            prefEditor.PutLong(DateOfAppointment, DateTime.Now.Ticks);
-            prefEditor.Commit();
-        }
-
         void AppointmentClick(object sender, EventArgs e)
         {
             var currentTimeSpan = new TimeSpan(_timePicker.CurrentHour.IntValue(), _timePicker.CurrentMinute.IntValue(), 0);
+            var responseResult = PointTime(currentTimeSpan);
+            var finalMesage = responseResult.IsError() ? responseResult.GetErrorMessage() : "Apontamento criado com sucesso!";
+            RunOnUiThread(() => Toast.MakeText(this, finalMesage, ToastLength.Long).Show());
 
+            _appointmentHelper.NextAppointment();
+            _appointmentButton.Text = _appointmentHelper.AppointmentType.ToString();
+
+            ValidateEndOfJourney();
+        }
+
+        private string PointTime(TimeSpan currentTimeSpan)
+        {
             var responseResult = string.Empty;
-            switch (_typeOfAppointment)
+
+            switch (_appointmentHelper.AppointmentType)
             {
                 case AppointmentType.Cheguei:
-                    responseResult = _pmaService.StartAppointment(currentTimeSpan);
+                    responseResult = _appointmentService.StartAppointment(currentTimeSpan);
                     break;
                 case AppointmentType.Intervalo:
                     SaveInterval(currentTimeSpan);
                     break;
                 case AppointmentType.Voltei:
                     var intervalTime = GetInterval(currentTimeSpan);
-                    responseResult = _pmaService.IntervalAppointment(intervalTime);
+                    responseResult = _appointmentService.IntervalAppointment(intervalTime);
                     break;
                 case AppointmentType.Fui:
-                    responseResult = _pmaService.EndAppointment(currentTimeSpan);
+                    responseResult = _appointmentService.EndAppointment(currentTimeSpan);
                     break;
             }
 
-            var finalMesage = responseResult.IsError() ? responseResult.GetErrorMessage() : "Apontamento criado com sucesso!";
-            RunOnUiThread(() => Toast.MakeText(this, finalMesage, ToastLength.Long).Show());
-
-            _typeOfAppointment = NextAppointment(_typeOfAppointment);
-            _appointmentButton.Text = _typeOfAppointment.ToString();
-            SavePreferences();
-            ValidateEndOfJourney();
+            return responseResult;
         }
 
-        private TimeSpan GetInterval(TimeSpan currentTimeSpan)
+        private static TimeSpan GetInterval(TimeSpan currentTimeSpan)
         {
-            var intervalTime = TimeSpan.Parse(_sharedPreferences.GetString(IntervalTime, null));
+            var intervalTime = TimeSpan.Parse(Preferences.Shared.GetString(Preferences.IntervalTime, null));
             return currentTimeSpan - intervalTime;
         }
 
-        private void SaveInterval(TimeSpan currentTimeSpan)
+        private static void SaveInterval(TimeSpan currentTimeSpan)
         {
-            var prefEditor = _sharedPreferences.Edit();
-            prefEditor.PutString(IntervalTime, currentTimeSpan.ToString());
+            var prefEditor = Preferences.Shared.Edit();
+            prefEditor.PutString(Preferences.IntervalTime, currentTimeSpan.ToString());
             prefEditor.Commit();
-        }
-
-        private static AppointmentType NextAppointment(AppointmentType typeAppointment)
-        {
-            var arrayList = (AppointmentType[])Enum.GetValues(typeof(AppointmentType));
-            var indexArray = Array.IndexOf(arrayList, typeAppointment) + 1;
-            return (arrayList.Length == indexArray) ? arrayList[0] : arrayList[indexArray];
         }
     }
 }

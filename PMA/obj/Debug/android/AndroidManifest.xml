@@ -3,9 +3,15 @@
   <uses-sdk android:minSdkVersion="11" />
   <application android:label="PMA" android:name="mono.android.app.Application" android:debuggable="true">
     <activity android:icon="@drawable/icon" android:label="Apontamento" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity" />
-    <receiver android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.BroadcastNetwork" />
+    <activity android:icon="@drawable/icon" android:label="Configurações" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.ConfigurationActivity" />
     <activity android:icon="@drawable/icon" android:label="PMA" android:theme="@android:style/Theme.Holo.NoActionBar.TranslucentDecor" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity" />
-    <service android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.NotificationService" />
+    <service android:name="md59e23c46067cb7350cf66ef4351dd79ff.NotificationService" />
+    <receiver android:name="md57462fb13d8fe2b8183f71615288e87ce.BroadcastBootCompleted">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+      </intent-filter>
+    </receiver>
+    <receiver android:name="md57462fb13d8fe2b8183f71615288e87ce.BroadcastNetwork" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="PMA.PMA.mono.MonoRuntimeProvider.__mono_init__" />
     <receiver android:name="mono.android.Seppuku">
       <intent-filter>
@@ -22,6 +28,7 @@
   </application>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

@@ -1,23 +1,25 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using PMA.Helper;
+using PMA.Helper.Notification;
+using PMA.Services;
 
 namespace PMA
 {
-    [Activity(Label = "PMA", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.NoActionBar.TranslucentDecor")]
+    [Activity(Label = "PMA", MainLauncher = true, Icon = "@drawable/icon",
+        Theme = "@android:style/Theme.Holo.NoActionBar.TranslucentDecor")]
     public class LoginActivity : Activity
     {
+        private LinearLayout _linearLayout;
+        private Button _loginButton;
         private EditText _passwordText;
         private EditText _usernameText;
-        private Button _loginButton;
-        private LinearLayout _linearLayout;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -32,14 +34,14 @@ namespace PMA
             _loginButton = FindViewById<Button>(Resource.Id.btnLogin);
             _linearLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout);
             _linearLayout.Visibility = ViewStates.Invisible;
-            
+
             _loginButton.Click += LoginClick;
             LoadPreferences();
         }
 
-        void LoginClick(object sender, EventArgs e)
+        private void LoginClick(object sender, EventArgs e)
         {
-            var inputManager = (InputMethodManager)GetSystemService(InputMethodService);
+            var inputManager = (InputMethodManager) GetSystemService(InputMethodService);
             inputManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, HideSoftInputFlags.NotAlways);
 
             StartTask();
@@ -55,10 +57,10 @@ namespace PMA
 
         private void Login()
         {
-            var servicePma = new Services.PmaService();
-            var response = servicePma.Login(_usernameText.Text.Trim(), _passwordText.Text.Trim());
+            var loginService = new LoginService();
+            var response = loginService.Login(_usernameText.Text.Trim(), _passwordText.Text.Trim());
 
-            var tokenData = GetToken(response);
+            var tokenData = response.GetToken();
             if (tokenData != null)
             {
                 SavePreferences();
@@ -74,27 +76,19 @@ namespace PMA
 
         private void SavePreferences()
         {
-            var prefs = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
-            var prefEditor = prefs.Edit();
-            prefEditor.PutString("USERNAME", _usernameText.Text);
-            prefEditor.PutString("PASSWORD", _passwordText.Text);
+            var prefEditor = Preferences.Shared.Edit();
+            prefEditor.PutString(Preferences.Username, _usernameText.Text);
+            prefEditor.PutString(Preferences.Password, _passwordText.Text);
             prefEditor.Commit();
-        }
-
-        private static string GetToken(string response)
-        {
-            var token = XDocument.Parse(response).Descendants("token").FirstOrDefault();
-            return token != null ? token.Value : null;
         }
 
         private void LoadPreferences()
         {
-            var prefs = Application.Context.GetSharedPreferences("PMA", FileCreationMode.Private);
-            var username = prefs.GetString("USERNAME", null);
-            var password = prefs.GetString("PASSWORD", null);
+            var username = Preferences.Shared.GetString(Preferences.Username, null);
+            var password = Preferences.Shared.GetString(Preferences.Password, null);
 
             if (username == null || password == null) return;
-            
+
             _usernameText.Text = username;
             _passwordText.Text = password;
             StartTask();

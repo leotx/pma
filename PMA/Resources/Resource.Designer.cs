@@ -89,10 +89,13 @@ namespace PMA
 			public const int password = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int transparent_linearlayout = 2130837512;
+			public const int progressbar = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int user = 2130837513;
+			public const int transparent_linearlayout = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int user = 2130837514;
 			
 			static Drawable()
 			{
@@ -110,23 +113,26 @@ namespace PMA
 			// aapt resource value: 0x7f070001
 			public const int btnAppointment = 2131165185;
 			
-			// aapt resource value: 0x7f070006
-			public const int btnLogin = 2131165190;
-			
-			// aapt resource value: 0x7f070005
-			public const int etPass = 2131165189;
-			
-			// aapt resource value: 0x7f070004
-			public const int etUserName = 2131165188;
+			// aapt resource value: 0x7f070007
+			public const int btnLogin = 2131165191;
 			
 			// aapt resource value: 0x7f070003
-			public const int imgLogo = 2131165187;
+			public const int chkAutoAppointment = 2131165187;
 			
-			// aapt resource value: 0x7f070007
-			public const int linearLayout = 2131165191;
+			// aapt resource value: 0x7f070006
+			public const int etPass = 2131165190;
+			
+			// aapt resource value: 0x7f070005
+			public const int etUserName = 2131165189;
+			
+			// aapt resource value: 0x7f070004
+			public const int imgLogo = 2131165188;
 			
 			// aapt resource value: 0x7f070008
-			public const int pbLogin = 2131165192;
+			public const int linearLayout = 2131165192;
+			
+			// aapt resource value: 0x7f070009
+			public const int pbLogin = 2131165193;
 			
 			// aapt resource value: 0x7f070002
 			public const int timeAppointment = 2131165186;
@@ -151,7 +157,10 @@ namespace PMA
 			public const int Appointment = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int Login = 2130903041;
+			public const int Configuration = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int Login = 2130903042;
 			
 			static Layout()
 			{

@@ -4,7 +4,7 @@ using Android.Content;
 using Android.Media;
 using Android.Support.V4.App;
 
-namespace PMA.Notification
+namespace PMA.Helper.Notification
 {
     public static class Notification
     {
