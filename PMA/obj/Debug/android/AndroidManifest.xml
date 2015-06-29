@@ -7,6 +7,11 @@
     <activity android:icon="@drawable/icon" android:label="PMA" android:theme="@android:style/Theme.Holo.NoActionBar.TranslucentDecor" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity" />
     <receiver android:name="md59a97fbe5a84f439e890e1bef993a2d05.BroadcastNetwork" />
     <service android:name="md59a97fbe5a84f439e890e1bef993a2d05.NotificationService" />
+    <receiver android:name="md59630601a41313e1f3077f443296d9b00.BroadcastBootCompleted">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+      </intent-filter>
+    </receiver>
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="PMA.PMA.mono.MonoRuntimeProvider.__mono_init__" />
     <receiver android:name="mono.android.Seppuku">
       <intent-filter>
@@ -23,6 +28,7 @@
   </application>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

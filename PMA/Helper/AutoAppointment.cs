@@ -94,7 +94,7 @@ namespace PMA.Helper
             return new DateTime(lastNotification);
         }
 
-        public static void SaveLastDate()
+        public void SaveLastDate()
         {
             var prefEditor = Preferences.Shared.Edit();
             prefEditor.PutLong(Preferences.LastNotification, DateTime.Now.Ticks);

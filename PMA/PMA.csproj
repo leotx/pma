@@ -78,6 +78,7 @@
     <Compile Include="ConfigurationActivity.cs" />
     <Compile Include="Helper\Appointment.cs" />
     <Compile Include="Helper\AutoAppointment.cs" />
+    <Compile Include="Helper\BroadcastBootCompleted.cs" />
     <Compile Include="Helper\ErrorParser.cs" />
     <Compile Include="Helper\Login.cs" />
     <Compile Include="Helper\Preferences.cs" />

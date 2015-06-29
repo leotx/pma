@@ -38,7 +38,7 @@ namespace PMA.Notification
                 if (wifiSsid.Contains(DefaultSsid)) return;
                 
                 Notification.Notify("Você saiu da Dextra!");
-                AutoAppointment.SaveLastDate();
+                _autoAppointment.SaveLastDate();
                 isValidSsid = false;
             }
             else if (wifiSsid.Contains(DefaultSsid))
