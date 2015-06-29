@@ -48,7 +48,7 @@ namespace PMA.Helper
                     break;
                 case AppointmentType.Intervalo:
                     var intervalAppointed = IntervalAppointment();
-                    if (intervalAppointed) appointment.AppointmentType = AppointmentType.Fim;
+                    if (intervalAppointed) appointment.AppointmentType = AppointmentType.Fui;
                     break;
             }
 
