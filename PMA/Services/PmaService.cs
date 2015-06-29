@@ -29,6 +29,7 @@ namespace PMA.Services
         public PmaService(string token)
         {
             _token = token;
+            DateOfAppointment = DateTime.Now;
             _httpClient = new HttpClient(new NativeMessageHandler());
         }
 
