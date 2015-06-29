@@ -12,7 +12,6 @@ namespace PMA.Notification
         private BroadcastNetwork _broadcastReceiver;
         private static AutoAppointment _autoAppointment;
         private const string DefaultSsid = "DXT-MOBILE";
-        private static bool _isValidSsid;
 
         public void Start()
         {
@@ -32,20 +31,26 @@ namespace PMA.Notification
             var wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
             var wifiSsid = wifiManager.ConnectionInfo.SSID;
 
-            if (_isValidSsid)
+            var isValidSsid = Preferences.Shared.GetBoolean(Preferences.ValidSsid, false);
+
+            if (isValidSsid)
             {
                 if (wifiSsid.Contains(DefaultSsid)) return;
                 
                 Notification.Notify("Você saiu da Dextra!");
                 AutoAppointment.SaveLastDate();
-                _isValidSsid = false;
+                isValidSsid = false;
             }
             else if (wifiSsid.Contains(DefaultSsid))
             {
                 Notification.Notify("Você está na Dextra!");
                 _autoAppointment.VerifyAppointment();
-                _isValidSsid = true;
+                isValidSsid = true;
             }
+
+            var editPreferences = Preferences.Shared.Edit();
+            editPreferences.PutBoolean(Preferences.ValidSsid, isValidSsid);
+            editPreferences.Commit();
         }
     }
 }

@@ -13,6 +13,7 @@ namespace PMA.Helper
         public const string AutoPointActivated = "AUTO_POINT";
         public const string LastNotification = "LAST_NOTIFICATION";
         public const string IntervalTime = "INTERVAL_TIME";
+        public const string ValidSsid = "VALID_SSID";
         public static ISharedPreferences Shared { get; private set; }
 
         static Preferences()
