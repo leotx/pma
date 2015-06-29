@@ -67,12 +67,14 @@ namespace PMA.Services
         {
             var appointment = FindDailyAppointment();
 
+            var totalIntervalTime = intervalTime + appointment.IntervalTime;
+
             var dailyAppointment = new
             {
                 token = _token,
                 data = $"{DateOfAppointment:yyyy-MM-dd}",
                 inicio = appointment.StartTime.ToString(),
-                intervalo = $"{intervalTime.RoundToNearest(5):HH:mm}",
+                intervalo = $"{totalIntervalTime.RoundToNearest(5):HH:mm}",
                 fim = "21:00"
             };
 

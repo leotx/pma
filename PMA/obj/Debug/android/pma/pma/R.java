@@ -25,8 +25,9 @@ public final class R {
         public static final int logo_dextra=0x7f020005;
         public static final int monoandroidsplash=0x7f020006;
         public static final int password=0x7f020007;
-        public static final int transparent_linearlayout=0x7f020008;
-        public static final int user=0x7f020009;
+        public static final int progressbar=0x7f020008;
+        public static final int transparent_linearlayout=0x7f020009;
+        public static final int user=0x7f02000a;
     }
     public static final class id {
         public static final int btnAppointment=0x7f070001;

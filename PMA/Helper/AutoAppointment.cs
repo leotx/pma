@@ -38,12 +38,31 @@ namespace PMA.Helper
 
             var appointment = new Appointment();
             appointment.ValidateAppointment();
-            if (appointment.AppointmentType != AppointmentType.Cheguei) return;
 
-            StartAppointment();
-            EndAppointment();
+            switch (appointment.AppointmentType)
+            {
+                case AppointmentType.Cheguei:
+                    StartAppointment();
+                    EndAppointment();
+                    appointment.AppointmentType = AppointmentType.Intervalo;
+                    break;
+                case AppointmentType.Intervalo:
+                    var intervalAppointed = IntervalAppointment();
+                    if (intervalAppointed) appointment.AppointmentType = AppointmentType.Fim;
+                    break;
+            }
+        }
 
-            appointment.NextAppointment();
+        private bool IntervalAppointment()
+        {
+            var dateOfAppointment = GetLastDate();
+            if (!dateOfAppointment.HasValue) return false;
+
+            var differenceTimeSpan = DateTime.Now - dateOfAppointment.Value;
+            if (differenceTimeSpan.TotalMinutes < 20) return false;
+
+            _pmaService.IntervalAppointment(differenceTimeSpan);
+            return true;
         }
 
         private void StartAppointment()
@@ -54,18 +73,24 @@ namespace PMA.Helper
 
         private void EndAppointment()
         {
-            var lastNotification = Preferences.Shared.GetLong(Preferences.LastNotification, 0);
-            if (lastNotification <= 0) return;
+            var dateOfAppointment = GetLastDate();
 
-            var dateOfAppointment = new DateTime(lastNotification);
-            if (dateOfAppointment.Date == DateTime.Now.Date) return;
+            if (!dateOfAppointment.HasValue || dateOfAppointment.Value.Date == DateTime.Now.Date) return;
 
-            var currentTimeSpan = new TimeSpan(dateOfAppointment.Hour, dateOfAppointment.Minute, 0);
-            _pmaService.DateOfAppointment = dateOfAppointment;
+            var currentTimeSpan = new TimeSpan(dateOfAppointment.Value.Hour, dateOfAppointment.Value.Minute, 0);
+            _pmaService.DateOfAppointment = dateOfAppointment.Value;
             _pmaService.EndAppointment(currentTimeSpan);
         }
 
-        public void SaveLastNotification()
+        private static DateTime? GetLastDate()
+        {
+            var lastNotification = Preferences.Shared.GetLong(Preferences.LastNotification, 0);
+            if (lastNotification <= 0) return null;
+
+            return new DateTime(lastNotification);
+        }
+
+        public static void SaveLastDate()
         {
             var prefEditor = Preferences.Shared.Edit();
             prefEditor.PutLong(Preferences.LastNotification, DateTime.Now.Ticks);

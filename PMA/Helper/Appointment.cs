@@ -5,7 +5,7 @@ namespace PMA.Helper
 {
     public class Appointment
     {
-        public AppointmentType AppointmentType { get; private set; }
+        public AppointmentType AppointmentType { get; set; }
 
         public void ValidateAppointment()
         {
