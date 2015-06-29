@@ -3,9 +3,9 @@ using Android.App;
 using Android.Content;
 using Android.Net;
 using Android.Net.Wifi;
-using PMA.Helper;
+using PMA.Helper.Broadcast;
 
-namespace PMA.Notification
+namespace PMA.Helper
 {
     public class NetworkVerify
     {
@@ -37,13 +37,13 @@ namespace PMA.Notification
             {
                 if (wifiSsid.Contains(DefaultSsid)) return;
                 
-                Notification.Notify("Você saiu da Dextra!");
+                Notification.Notification.Notify("Você saiu da Dextra!");
                 _autoAppointment.SaveLastDate();
                 isValidSsid = false;
             }
             else if (wifiSsid.Contains(DefaultSsid))
             {
-                Notification.Notify("Você está na Dextra!");
+                Notification.Notification.Notify("Você está na Dextra!");
                 _autoAppointment.VerifyAppointment();
                 isValidSsid = true;
             }

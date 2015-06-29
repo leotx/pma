@@ -5,13 +5,13 @@
     <activity android:icon="@drawable/icon" android:label="Apontamento" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.AppointmentActivity" />
     <activity android:icon="@drawable/icon" android:label="Configurações" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.ConfigurationActivity" />
     <activity android:icon="@drawable/icon" android:label="PMA" android:theme="@android:style/Theme.Holo.NoActionBar.TranslucentDecor" android:name="md51323aa3d64a4ef9f67ac88f4ab8ea406.LoginActivity" />
-    <receiver android:name="md59a97fbe5a84f439e890e1bef993a2d05.BroadcastNetwork" />
-    <service android:name="md59a97fbe5a84f439e890e1bef993a2d05.NotificationService" />
-    <receiver android:name="md59630601a41313e1f3077f443296d9b00.BroadcastBootCompleted">
+    <service android:name="md59e23c46067cb7350cf66ef4351dd79ff.NotificationService" />
+    <receiver android:name="md57462fb13d8fe2b8183f71615288e87ce.BroadcastBootCompleted">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
+    <receiver android:name="md57462fb13d8fe2b8183f71615288e87ce.BroadcastNetwork" />
     <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="2147483647" android:authorities="PMA.PMA.mono.MonoRuntimeProvider.__mono_init__" />
     <receiver android:name="mono.android.Seppuku">
       <intent-filter>

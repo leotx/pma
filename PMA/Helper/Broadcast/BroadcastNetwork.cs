@@ -1,7 +1,7 @@
 using System;
 using Android.Content;
 
-namespace PMA.Notification
+namespace PMA.Helper.Broadcast
 {
     [BroadcastReceiver]
     public class BroadcastNetwork : BroadcastReceiver

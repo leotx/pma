@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using PMA.Helper;
-using PMA.Notification;
+using PMA.Helper.Notification;
 using PMA.Services;
 
 namespace PMA

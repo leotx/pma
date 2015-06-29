@@ -6,7 +6,6 @@ using Android.Views;
 using Android.Widget;
 using PMA.Helper;
 using PMA.Model;
-using PMA.Notification;
 using PMA.Services;
 
 namespace PMA

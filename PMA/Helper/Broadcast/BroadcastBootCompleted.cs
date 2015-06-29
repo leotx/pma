@@ -1,8 +1,8 @@
-using Android.Content;
 using Android.App;
-using PMA.Notification;
+using Android.Content;
+using PMA.Helper.Notification;
 
-namespace PMA.Helper
+namespace PMA.Helper.Broadcast
 {
     [BroadcastReceiver]
     [IntentFilter(new[] { Intent.ActionBootCompleted })]
