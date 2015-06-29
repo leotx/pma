@@ -33,4 +33,3 @@ F:\projects\PMA\PMA\bin\Debug\Xamarin.Android.Support.v4.dll
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\transparent_linearlayout.xml
 F:\projects\PMA\PMA\obj\Debug\res\layout\configuration.xml
 F:\projects\PMA\PMA\obj\Debug\res\drawable-hdpi\progressbar.xml
-F:\projects\PMA\PMA\obj\Debug\PMA.csprojResolveAssemblyReference.cache

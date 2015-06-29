@@ -50,8 +50,8 @@ namespace PMA
             switch (item.ItemId)
             {
                 case 0:
-                    var loginActivity = new Intent(this, typeof(ConfigurationActivity));
-                    StartActivity(loginActivity);
+                    var configurationActivity = new Intent(this, typeof(ConfigurationActivity));
+                    StartActivity(configurationActivity);
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);

@@ -51,6 +51,8 @@ namespace PMA.Helper
                     if (intervalAppointed) appointment.AppointmentType = AppointmentType.Fim;
                     break;
             }
+
+            appointment.SavePreferences();
         }
 
         private bool IntervalAppointment()

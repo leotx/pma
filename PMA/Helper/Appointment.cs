@@ -22,7 +22,7 @@ namespace PMA.Helper
             }
         }
 
-        private void SavePreferences()
+        public void SavePreferences()
         {
             var prefEditor = Preferences.Shared.Edit();
             prefEditor.PutInt(Preferences.TypeOfAppointment, (int)AppointmentType);
